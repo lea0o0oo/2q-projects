@@ -4,20 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "autoprefixer": "^10.4.16",
-    "flowbite": "^2.0.0",
     "postcss": "^8.4.31",
+    "preline": "^1.9.0",
     "tailwindcss": "^3.3.5",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
+    "daisyui": "^3.9.4",
     "vite": "^4.4.5"
   }
 }

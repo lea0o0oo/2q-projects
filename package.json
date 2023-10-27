@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "dev": "echo Sei nella cartella di root! Esegui il comando nel client o nel server",
+    "test": "echo Sei nella cartella di root! Esegui il comando nel client o nel server"
+  }
+}

@@ -1,0 +1,33 @@
+:root {
+  --footer-h: 245px;
+  --scrollbarBG: transparent;
+  --scrollbarColor: gray;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbarColor) var(--scrollbarBG);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 9px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarColor);
+  border-radius: 14px;
+  border: 3px solid var(--scrollbarBG);
+}
