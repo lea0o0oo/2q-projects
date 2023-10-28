@@ -36,7 +36,7 @@
         </div>
         <div id="slide2" class="carousel-item relative w-full">
           <img
-            src="https://www.digikey.com/-/media/MakerIO/Images/blogs/2022/Getting%20Started%20with%20Tinkercad%20Circuits/Getting-Started-with-Tinkercad-Circuits.jpg"
+            src="https://i.imgur.com/WXipW0o.png"
             class="w-full"
             style="object-fit: cover"
           />
