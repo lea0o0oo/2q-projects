@@ -80,7 +80,7 @@
 
       <div class="lg:col-span-2">
         <div class="flex w-full h-full justify-center">
-          <button class="btn btn-primary">Vedi progetti</button>
+          <button class="btn btn-primary" @click="window.location.href = '/progetti'">Vedi progetti</button>
         </div>
       </div>
       <!-- End Col -->
