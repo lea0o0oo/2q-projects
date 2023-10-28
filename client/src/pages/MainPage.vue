@@ -79,7 +79,7 @@
       <!-- End Col -->
 
       <div class="lg:col-span-2">
-        <button class="btn btn-primary btn-circle">Vedi progetti</button>
+        <button class="btn btn-primary">Vedi progetti</button>
       </div>
       <!-- End Col -->
     </div>
