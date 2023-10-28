@@ -79,7 +79,9 @@
       <!-- End Col -->
 
       <div class="lg:col-span-2">
-        <button class="btn btn-primary">Vedi progetti</button>
+        <div class="flex w-full h-full justify-center">
+          <button class="btn btn-primary">Vedi progetti</button>
+        </div>
       </div>
       <!-- End Col -->
     </div>
