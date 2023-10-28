@@ -4,7 +4,7 @@
   <div
     class="hero"
     style="
-      background-image: url(https://lh5.googleusercontent.com/bTd5lto_5yMMTDxCTfiBngxwr7cQqGV6ANdnwEGXl0L7nPpBb22EL9ONRxcRxKfmLmiXfmOOeLkp-dbf7HQTzNU=w16383);
+      background-image: url(https://i.pinimg.com/736x/f9/dd/b4/f9ddb48c4d9010e8333a319d0213ca35.jpg);
       height: 20vh;
     "
   >
@@ -23,7 +23,7 @@
       <div class="carousel w-full" style="height: 400px">
         <div id="slide1" class="carousel-item relative w-full">
           <img
-            src="https://lh4.googleusercontent.com/9910-s3R8wQLqHfnuC4dSrL9G5VnT8uAyJhtKQ0cGDYlSc8ik1i1cxwuI3nTQ4iNVEb-Zi5aGZQCFHQS1i8Ppyg=w16383"
+            src="https://img.freepik.com/premium-photo/breadboard-with-electrical-elements-wooden-table_181705-1111.jpg"
             class="w-full"
             style="object-fit: cover"
           />
@@ -36,7 +36,7 @@
         </div>
         <div id="slide2" class="carousel-item relative w-full">
           <img
-            src="https://lh5.googleusercontent.com/-heHW7XsTe3uPl3R1zwLZkNa7bkHPmLicPg_0TO-5VA2lqRV14YEZsJgkGKLxnkAGGWDerjS-tM2r4F5Abg28Pc=w16383"
+            src="https://www.digikey.com/-/media/MakerIO/Images/blogs/2022/Getting%20Started%20with%20Tinkercad%20Circuits/Getting-Started-with-Tinkercad-Circuits.jpg"
             class="w-full"
             style="object-fit: cover"
           />
