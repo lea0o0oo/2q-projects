@@ -1,7 +1,7 @@
 <script setup>
 const goto = (url) => {
-  window.location.href = url
-}
+  window.location.href = url;
+};
 </script>
 
 <template>
@@ -34,7 +34,7 @@ const goto = (url) => {
           <div
             class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
           >
-            <a href="#slide4" class="btn btn-circle">❮</a>
+            <a href="#slide3" class="btn btn-circle">❮</a>
             <a href="#slide2" class="btn btn-circle">❯</a>
           </div>
         </div>
@@ -61,7 +61,7 @@ const goto = (url) => {
             class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
           >
             <a href="#slide2" class="btn btn-circle">❮</a>
-            <a href="#slide4" class="btn btn-circle">❯</a>
+            <a href="#slide1" class="btn btn-circle">❯</a>
           </div>
         </div>
       </div>
@@ -84,7 +84,9 @@ const goto = (url) => {
 
       <div class="lg:col-span-2">
         <div class="flex w-full h-full justify-center">
-          <button class="btn btn-primary" @click="goto('/progetti')">Vedi progetti</button>
+          <button class="btn btn-primary" @click="goto('/progetti')">
+            Vedi progetti
+          </button>
         </div>
       </div>
       <!-- End Col -->
