@@ -1,8 +1,84 @@
+<script setup>
+import config from "../../config";
+import axios from "axios";
+import utils from "../helpers/utils";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+let projectData;
+
+const monthNames = [
+  "Gennaio",
+  "Febbraio",
+  "Marzo",
+  "Aprile",
+  "Maggio",
+  "Giugno",
+  "Luglio",
+  "Agosto",
+  "Settembre",
+  "Ottobre",
+  "Novembre",
+  "Dicembre",
+];
+
+utils.onLoad(() => {
+  axios
+    .get(`${config.api.baseURL}/project/${route.params.projectId}`)
+    .then((response) => {
+      console.log(response.data);
+      projectData = response.data.result;
+
+      if (
+        projectData.metadata.icon == null ||
+        !utils.isEmpty(projectData.metadata.icon)
+      ) {
+        utils.getById("project-icon").src = projectData.metadata.icon;
+      }
+
+      utils.getById("project-name").innerText = projectData.metadata.name;
+      utils.getById("project-desc").innerHTML =
+        projectData.metadata.description;
+      const date = new Date(projectData.metadata.createdAt * 1000);
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear().toString();
+      const formattedDate = `${day} ${monthNames[month - 1]} ${year}`;
+      utils.getById("project-date").innerText = formattedDate;
+      utils.getById("project-image").src = projectData.content.image;
+      utils.getById("project-image-fullscreen").src = projectData.content.image;
+
+      if (utils.isEmpty(projectData.content.projectLink)) {
+        utils.getById("links-div").classList.add("hidden");
+      }
+      utils.getById("project-iframe").src = projectData.content.iframe;
+      utils.getById("htmlDIV").innerHTML = projectData.content.customHTML;
+
+      utils.getById("loadingDIV").classList.remove("flex");
+      utils.getById("loadingDIV").classList.add("hidden");
+      utils.getById("mainDIV").classList.remove("hidden");
+      utils.getById("mainDIV").classList.add("grid");
+    });
+});
+
+function openProjectLink() {
+  window.open(projectData.content.projectLink, "_blank");
+}
+</script>
+
 <template>
   <div class="w-full mb-10">
     <div
-      class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4"
+      id="loadingDIV"
+      class="flex w-full justify-center"
+      style="height: calc(100vh - 275px)"
+    >
+      <span class="loading loading-bars loading-lg"></span>
+    </div>
+    <div
+      class="grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4 hidden"
       style="width: 99.5%"
+      id="mainDIV"
     >
       <div class="bg-neutral w-full rounded-lg lg:ml-2">
         <div class="ml-2 mr-2 mt-3">
@@ -13,8 +89,12 @@
               class="mask mask-squircle"
               style="height: 60px"
             />
-            <h3 class="font-extrabold text-3xl ml-4" style="margin-top: 12px">
-              Semaforo
+            <h3
+              class="font-extrabold text-3xl ml-4"
+              id="project-name"
+              style="margin-top: 12px"
+            >
+              [NOME]
             </h3>
           </div>
           <div class="divider"></div>
@@ -22,15 +102,16 @@
           <pre
             class="mt-5 ml-2"
             style="white-space: pre-wrap; overflow-y: auto; max-height: 30vh"
+            id="project-desc"
           >
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla urna porttitor rhoncus dolor. Commodo elit at imperdiet dui accumsan sit amet nulla facilisi. Interdum velit euismod in pellentesque massa placerat. Et netus et malesuada fames ac turpis egestas maecenas pharetra. Convallis convallis tellus id interdum velit laoreet id. Habitant morbi tristique senectus et netus et malesuada fames ac. Urna nunc id cursus metus aliquam eleifend mi. Odio euismod lacinia at quis risus sed. Duis at consectetur lorem donec massa sapien faucibus et. Suspendisse in est ante in nibh. Tortor aliquam nulla facilisi cras. Sit amet massa vitae tortor. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Fermentum leo vel orci porta non. Integer feugiat scelerisque varius morbi enim nunc. Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Nibh nisl condimentum id venenatis a condimentum vitae sapien pellentesque. Sollicitudin nibh sit amet commodo nulla facilisi. Diam sollicitudin tempor id eu.</pre
           >
 
           <h4 class="font-bold text-xl mt-10">Data</h4>
-          11 Gennaio 1967
+          <p id="project-date">[DATA]</p>
           <div id="links-div" class="mb-3">
             <h2 class="font-bold text-3xl mt-5">Link</h2>
-            <button class="btn">
+            <button class="btn" @click="openProjectLink()">
               Link del progetto
               <svg
                 fill="currentColor"
@@ -65,11 +146,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             </div>
             <div style="height: 700px" class="rounded-lg">
               <iframe
-              src=https://create.arduino.cc/editor/lea0o0oo/714c965a-ce4d-421e-8f66-2fb37af07120/preview?embed
-              class="w-full h-full" />
+                id="project-iframe"
+                src=""
+                class="w-full h-full"
+                sandbox="allow-same-origin allow-scripts"
+              />
             </div>
           </div>
-          <div id="htmlDIV" class="w-full h-full mb-3"></div>
+          <div id="htmlDIV" class="w-full"></div>
         </div>
       </div>
     </div>
@@ -83,7 +167,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         src="https://i1.wp.com/potafiori.com/wp-content/uploads/2020/04/placeholder.png"
         style="width: 100%; height: auto"
         class="rounded-xl"
-        id="image-fullscreen"
+        id="project-image-fullscreen"
       />
     </div>
     <form method="dialog" class="modal-backdrop">

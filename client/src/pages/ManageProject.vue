@@ -4,6 +4,21 @@ import { useRoute } from "vue-router";
 import Swal from "sweetalert2";
 import axios from "axios";
 import config from "../../config";
+import checkJWT from "../helpers/checkJWT";
+
+checkJWT();
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 const router = useRoute();
 let projectStructure = {
@@ -27,7 +42,47 @@ function prgIconDefault() {
 }
 
 utils.onLoad(() => {
-  console.log(router.params);
+  if (router.params.projectId != "new") {
+    utils.getById("modal_loading").checked = true;
+
+    axios
+      .get(`${config.api.baseURL}/project/${router.params.projectId}`)
+      .then((response) => {
+        let projectData = response.data.result;
+
+        const unixTimestamp = projectData.metadata.createdAt;
+        const datePicker = document.getElementById("project-date");
+        const date = new Date(unixTimestamp * 1000);
+
+        // Format the date in the desired format
+        const day = date.getDate().toString().padStart(2, "0");
+        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+        const year = date.getFullYear().toString();
+        const formattedDate = `${year}-${month}-${day}`;
+
+        datePicker.value = formattedDate;
+
+        utils.getById("project-name").value = projectData.metadata.name;
+        utils.getById("project-desc").value = projectData.metadata.description;
+        document.getElementById("project-icon").src = projectData.metadata.icon
+          ? projectData.metadata.icon
+          : document.getElementById("project-icon").src;
+        utils.getById("project-link").value = projectData.content.projectLink;
+        document.getElementById("project-image").src = projectData.content.image
+          ? projectData.content.image
+          : document.getElementById("project-image").src;
+
+        document.getElementById("image-fullscreen").src =
+          document.getElementById("project-image").src;
+        utils.getById("project-html").value = projectData.content.customHTML;
+        utils.getById("project-iframe").value = projectData.content.iframe;
+
+        utils.getById("modal_loading").checked = false;
+      });
+  }
+});
+
+utils.onLoad(() => {
   const iconImagePicker = document.getElementById("project-icon-picker");
   const iconPreviewImage = document.getElementById("project-icon");
   const imagePicker = document.getElementById("project-image-picker");
@@ -162,6 +217,34 @@ async function save() {
         window.location.href = "/dashboard";
       })
       .catch((error) => {
+        Swal.fire("Error", error.response.data.error, "error");
+      })
+      .finally(() => {
+        utils.getById("save-btn").innerHTML = "Save";
+        utils.getById("save-btn").disabled = false;
+      });
+  } else {
+    axios
+      .post(
+        `${config.api.baseURL}/updateProject`,
+        {
+          projectData: projectStructure,
+          projectId: router.params.projectId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        Toast.fire({
+          icon: "success",
+          title: "Salvato",
+        });
+      })
+      .catch((error) => {
+        console.error(error);
         Swal.fire("Error", error.response.data.error, "error");
       })
       .finally(() => {
@@ -309,4 +392,17 @@ async function save() {
       <button>close</button>
     </form>
   </dialog>
+
+  <!-- Put this part before </body> tag -->
+  <input type="checkbox" id="modal_loading" class="modal-toggle" />
+  <div class="modal">
+    <div class="modal-box">
+      <div class="flex w-full justify-center">
+        <span class="loading loading-bars loading-lg"></span>
+      </div>
+      <div class="flex w-full justify-center mt-4">
+        <p>Caricamento</p>
+      </div>
+    </div>
+  </div>
 </template>
