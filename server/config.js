@@ -6,7 +6,7 @@ module.exports = {
     databaseName: "mainDB", // Nome del database principale
   },
   cors: {
-    origin: "*", // Impostazioni di cors, non cambiare.
+    origin: "*", // Impostazioni di cors.
   },
   api: {
     port: 3001, // Porta del back-end
@@ -15,6 +15,8 @@ module.exports = {
     resultsPerPage: 12, // Risultati per pagina
   },
   accounts: {
-    saltRound: 10, // Giri di sale
+    saltRounds: 10, // Giri di sale
+    adminKey: process.env.ADMIN_KEY, // Chiave admin per la registrazione
+    secretJWT: process.env.JWT_SECRET,
   },
 };

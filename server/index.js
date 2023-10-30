@@ -3,20 +3,21 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const compression = require("compression");
 
-app.use(compression());
-app.use(require("./routes"));
+app.use(morgan("combined"));
+app.use(express.json());
 app.use(
   cors({
     origin: config.cors.origin,
   })
 );
-
-app.use(express.json());
+app.use(compression());
+app.use(require("./routes"));
 
 app.get("/", (req, res) => {
   res.send("ciao mondo");
@@ -26,6 +27,13 @@ const connectionOptions = {
   dbName: config.database.databaseName,
   useUnifiedTopology: true,
 };
+
+process.on("uncaughtException", (err, origin) => {
+  console.log("--------------- ERROR ---------------");
+  console.error(err);
+  console.log("--------------- ORIGIN ---------------");
+  console.log(origin);
+});
 
 async function connectToDb() {
   try {

@@ -19,6 +19,15 @@ if (window.location.pathname == "/progetti") {
         "font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
       );
   });
+} else if (window.location.pathname != "/") {
+  document.addEventListener("DOMContentLoaded", () => {
+    document
+      .getElementById("home-link")
+      .setAttribute(
+        "class",
+        "font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+      );
+  });
 }
 </script>
 
@@ -114,7 +123,7 @@ if (window.location.pathname == "/progetti") {
 
           <a
             class="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 sm:border-l sm:border-gray-300 sm:my-6 sm:pl-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
-            href="#"
+            href="/login"
           >
             <svg
               class="w-4 h-4"

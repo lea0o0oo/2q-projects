@@ -7,7 +7,7 @@ const projectSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -16,4 +16,4 @@ const projectSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("projects", projectSchema);
+module.exports = mongoose.model("users", projectSchema);

@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "name": "Nome progetto",
+    "description": "Descrizione progetto",
+    "createdAt": 1234567890,
+    "icon": "icona codificata in Base64"
+  },
+  "content": {
+    "projectLink": "Eventuali link del progetto",
+    "image": "Immagine progetto codificata in Base64",
+    "iframe": "Eventuali iframe",
+    "customHTML": "Eventuale html custom"
+  }
+}

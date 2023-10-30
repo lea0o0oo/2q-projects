@@ -4,12 +4,21 @@ import NotFoundPage from "./pages/NotFound.vue";
 
 import MainPage from "./pages/MainPage.vue";
 import Projects from "./pages/Projects.vue";
+import Login from "./pages/Auth/Login.vue";
+import Register from "./pages/Auth/Register.vue";
+import Dashboard from "./pages/Dashboard.vue";
+import ManageProject from "./pages/ManageProject.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/", component: MainPage },
     { path: "/progetti", component: Projects },
+    { path: "/login", component: Login },
+    { path: "/register", component: Register },
+    { path: "/dashboard", component: Dashboard },
+    { path: "/manage/:projectId", component: ManageProject },
+
     { path: "/:pathMatch(.*)*", component: NotFoundPage },
   ],
 });
