@@ -9,6 +9,16 @@ router.get("/getProjects", async (req, res) => {
       page: req.query.page,
       limit: config.projects.resultsPerPage,
     }).then((result) => {
+      let tmpResult = Object.keys(result.docs);
+      let finalResult = [];
+      tmpResult.forEach((doc) => {
+        finalResult.push({
+          createdAt: result.docs[doc].createdAt,
+          name: result.docs[doc].name,
+          _id: result.docs[doc]._id,
+        });
+      });
+      result.docs = finalResult;
       res.status(200).json({
         success: true,
         result: result,

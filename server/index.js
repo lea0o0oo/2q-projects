@@ -10,7 +10,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const compression = require("compression");
 
 app.use(morgan("combined"));
-app.use(express.json());
+app.use(express.json({ limit: config.api.maxPayload * 1000000 }));
 app.use(
   cors({
     origin: config.cors.origin,

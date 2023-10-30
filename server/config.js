@@ -10,6 +10,7 @@ module.exports = {
   },
   api: {
     port: 3001, // Porta del back-end
+    maxPayload: 10, // In mb
   },
   projects: {
     resultsPerPage: 12, // Risultati per pagina

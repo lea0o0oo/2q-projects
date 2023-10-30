@@ -1,3 +1,23 @@
+<script setup>
+import axios from "axios";
+import config from "../../config";
+import utils from "../helpers/utils";
+import cardTemplate from "./mainDashProjectCardTemplate";
+
+utils.onLoad(() => {
+  axios.get(`${config.api.baseURL}/getProjects`).then((response) => {
+    utils.getById("projectsContainer").innerHTML = "";
+    response.data.result.docs.forEach((doc) => {
+      utils.getById("projectsContainer").innerHTML += cardTemplate(
+        doc.name,
+        utils.readableDate(doc.createdAt),
+        `/view/${doc._id}`
+      );
+    });
+  });
+});
+</script>
+
 <template>
   <div style="height: calc(100vh - var(--footer-h))">
     <h1 class="font-bold text-5xl w-full text-center mt-3">
@@ -33,42 +53,11 @@
       <!-- Grid -->
       <div
         class="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+        id="projectsContainer"
       >
-        <!-- Card -->
-        <a
-          class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-gray-800 dark:border-gray-800"
-          href="#"
-        >
-          <div class="p-4 md:p-5">
-            <div class="flex justify-between items-center">
-              <div>
-                <h3
-                  class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200"
-                >
-                  Semaforo
-                </h3>
-                <p class="text-sm text-gray-500">1 Gennaio 1800</p>
-              </div>
-              <div class="pl-3">
-                <svg
-                  class="w-3.5 h-3.5 text-gray-500"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                >
-                  <path
-                    d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </a>
-        <!-- End Card -->
+        <div class="lg:col-span-4 md:col-span-3 flex justify-center">
+          <span class="loading loading-bars loading-lg"></span>
+        </div>
       </div>
       <!-- End Grid -->
     </div>

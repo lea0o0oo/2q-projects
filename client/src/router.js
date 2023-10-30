@@ -8,6 +8,7 @@ import Login from "./pages/Auth/Login.vue";
 import Register from "./pages/Auth/Register.vue";
 import Dashboard from "./pages/Dashboard.vue";
 import ManageProject from "./pages/ManageProject.vue";
+import ViewProject from "./pages/ViewProject.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -18,6 +19,7 @@ export const router = createRouter({
     { path: "/register", component: Register },
     { path: "/dashboard", component: Dashboard },
     { path: "/manage/:projectId", component: ManageProject },
+    { path: "/view/:projectId", component: ViewProject },
 
     { path: "/:pathMatch(.*)*", component: NotFoundPage },
   ],

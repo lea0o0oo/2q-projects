@@ -186,7 +186,7 @@ async function save() {
           <h4 class="font-bold text-xl">Nome progetto</h4>
           <input
             type="text"
-            placeholder="efjnefieo"
+            placeholder=""
             class="input input-bordered w-full input-primary"
             id="project-name"
           />
