@@ -9,12 +9,14 @@ import Register from "./pages/Auth/Register.vue";
 import Dashboard from "./pages/Dashboard.vue";
 import ManageProject from "./pages/ManageProject.vue";
 import ViewProject from "./pages/ViewProject.vue";
+import ShieldArduino from "./pages/ShieldArduino.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/", component: MainPage },
     { path: "/progetti", component: Projects },
+    { path: "/shield-arduino", component: ShieldArduino },
     { path: "/login", component: Login },
     { path: "/register", component: Register },
     { path: "/dashboard", component: Dashboard },

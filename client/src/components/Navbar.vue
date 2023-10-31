@@ -4,20 +4,23 @@ import Search from "./Search.vue";
 
 const router = useRoute();
 console.log(window.location.pathname);
-if (window.location.pathname == "/progetti") {
+if (window.location.pathname != "/") {
   document.addEventListener("DOMContentLoaded", () => {
-    document
-      .getElementById("progetti-link")
-      .setAttribute(
-        "class",
-        "font-medium text-blue-600 sm:py-6 dark:text-blue-500"
-      );
     document
       .getElementById("home-link")
       .setAttribute(
         "class",
         "font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
       );
+    let finalId = window.location.pathname.slice(1);
+    try {
+      document
+        .getElementById(finalId)
+        .setAttribute(
+          "class",
+          "font-medium text-blue-600 sm:py-6 dark:text-blue-500"
+        );
+    } catch (e) {}
   });
 } else if (window.location.pathname != "/") {
   document.addEventListener("DOMContentLoaded", () => {
@@ -117,8 +120,14 @@ if (window.location.pathname == "/progetti") {
           <a
             class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
             href="/progetti"
-            id="progetti-link"
+            id="progetti"
             >Progetti</a
+          >
+          <a
+            class="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+            href="/shield-arduino"
+            id="shield-arduino"
+            >Shield arduino</a
           >
 
           <a
