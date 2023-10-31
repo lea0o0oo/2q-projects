@@ -85,31 +85,71 @@ utils.onLoad(() => {
   }
 -->
 
-    <div class="mb-3">
-      <label for="Quantity" class="sr-only"> Quantity </label>
-
-      <div class="flex items-center gap-1">
-        <button
-          type="button"
-          class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+    <div class="flex align-middle justify-center">
+      <button class="btn btn-circle mb-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="-5 0 25 25"
+          stroke="currentColor"
         >
-          &lt;-
-        </button>
-
-        <input
-          type="number"
-          id="Quantity"
-          value="1"
-          class="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-        />
-
-        <button
-          type="button"
-          class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+          <g
+            id="icons"
+            stroke="none"
+            stroke-width="1"
+            fill="none"
+            fill-rule="evenodd"
+          >
+            <g
+              id="ui-gambling-website-lined-icnos-casinoshunter"
+              transform="translate(-1913.000000, -158.000000)"
+              fill="currentColor"
+              fill-rule="nonzero"
+            >
+              <g id="1" transform="translate(1350.000000, 120.000000)">
+                <path
+                  d="M566.453517,38.569249 L577.302459,48.9938158 L577.39261,49.0748802 C577.75534,49.423454 577.968159,49.8870461 578,50.4382227 L577.998135,50.6228229 C577.968159,51.1129539 577.75534,51.576546 577.333675,51.9774469 L577.339095,51.9689832 L566.453517,62.430751 C565.663694,63.1897497 564.399001,63.1897497 563.609178,62.430751 C562.796941,61.650213 562.796941,60.3675924 563.609432,59.5868106 L573.012324,50.5572471 L563.609178,41.4129456 C562.796941,40.6324076 562.796941,39.349787 563.609178,38.569249 C564.399001,37.8102503 565.663694,37.8102503 566.453517,38.569249 Z"
+                  id="left"
+                  transform="translate(570.500000, 50.500000) scale(-1, 1) translate(-570.500000, -50.500000) "
+                ></path>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
+      <p class="mt-3 ml-2 mr-2 font-bold">1/10</p>
+      <button class="btn btn-circle mb-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="-5 0 25 25"
+          stroke="currentColor"
         >
-          ->
-        </button>
-      </div>
+          <g
+            id="icons"
+            stroke="none"
+            stroke-width="1"
+            fill="none"
+            fill-rule="evenodd"
+          >
+            <g
+              id="ui-gambling-website-lined-icnos-casinoshunter"
+              transform="translate(-1783.000000, -158.000000)"
+              fill="currentColor"
+              fill-rule="nonzero"
+            >
+              <g id="1" transform="translate(1350.000000, 120.000000)">
+                <path
+                  d="M436.453517,38.569249 L447.302459,48.9938158 L447.39261,49.0748802 C447.75534,49.423454 447.968159,49.8870461 448,50.4382227 L447.998135,50.6228229 C447.968159,51.1129539 447.75534,51.576546 447.333675,51.9774469 L447.339095,51.9689832 L436.453517,62.430751 C435.663694,63.1897497 434.399001,63.1897497 433.609178,62.430751 C432.796941,61.650213 432.796941,60.3675924 433.609432,59.5868106 L443.012324,50.5572471 L433.609178,41.4129456 C432.796941,40.6324076 432.796941,39.349787 433.609178,38.569249 C434.399001,37.8102503 435.663694,37.8102503 436.453517,38.569249 Z"
+                  id="right"
+                ></path>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
     </div>
   </div>
 </template>

@@ -44,7 +44,7 @@ const goto = (url) => {
             >
               Progettare con <br />
               <span
-                class="bg-clip-text bg-gradient-to-tl from-green-600 to-blue-600 text-transparent"
+                class="bg-clip-text bg-gradient-to-tl from-green-600 to-blue-600 text-transparent font-extrabold"
                 >Arduino</span
               >
             </h1>
@@ -88,14 +88,11 @@ const goto = (url) => {
     </div>
   </div>
   <!-- End Hero -->
-  <div
-    class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 w-full"
-    style="height: 500px"
-  >
-    <div>
+  <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 w-full">
+    <div class="lg:m-0 m-3 md:m-0">
       <iframe
-        style="height: 100%; width: 100%"
-        class="rounded-tr-xl"
+        style="height: 500px; width: 100%"
+        class="lg:rounded-tr-xl md:rounded-tr-xl"
         src="https://www.youtube-nocookie.com/embed/wKtu3txecQQ?si=ykM_HT0sIx2G_LcH"
         title="YouTube video player"
         frameborder="0"
@@ -105,7 +102,7 @@ const goto = (url) => {
     </div>
     <div
       id="carouselExampleCaptions"
-      class="relative rounded-tr-xl"
+      class="relative lg:m-0 md:m-0"
       style="width: 100%; height: 500px"
       data-te-carousel-init
       data-te-ride="carousel"
@@ -153,7 +150,7 @@ const goto = (url) => {
         >
           <img
             src="https://img.freepik.com/premium-photo/breadboard-with-electrical-elements-wooden-table_181705-1111.jpg"
-            class="block w-full rounded-tl-xl"
+            class="block w-full lg:rounded-tl-xl"
             style="height: 500px; object-fit: cover"
             alt="..."
           />
@@ -169,7 +166,7 @@ const goto = (url) => {
         >
           <img
             src="/board.jpeg"
-            class="block w-full rounded-tl-xl"
+            class="block w-full lg:rounded-tl-xl md:rounded-tl-xl"
             alt="..."
             style="height: 500px; object-fit: cover"
           />
@@ -184,8 +181,8 @@ const goto = (url) => {
           style="backface-visibility: hidden"
         >
           <img
-            src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(23).jpg"
-            class="block w-full rounded-tl-xl"
+            src="https://www.punto-informatico.it/app/uploads/2023/06/Arduino-UNO-R4.jpg"
+            class="block w-full lg:rounded-tl-xl md:rounded-tl-xl"
             alt="..."
             style="height: 500px; object-fit: cover"
           />

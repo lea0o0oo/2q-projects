@@ -1,14 +1,19 @@
-<script setup></script>
+<script setup>
+import { Application } from "@splinetool/runtime";
+import utils from "../helpers/utils";
+
+utils.onLoad(() => {
+  const canvas = document.getElementById("canvas3d");
+  const app = new Application(canvas);
+  app.load("https://prod.spline.design/wMn7VcZcqPfBKFUg/scene.splinecode");
+});
+</script>
 
 <template>
   <div style="">
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 w-full">
       <div class="flex w-full justify-center mt-2">
-        <img
-          src="https://j6z7x9q7.rocketcdn.me/wp-content/uploads/2019/07/Arduino_Uno_4_web.jpg"
-          class="rounded-lg"
-          style="height: 80%; width: auto; object-fit: cover"
-        />
+        <canvas id="canvas3d"></canvas>
       </div>
       <div class="mt-2">
         <h1 class="font-extrabold text-5xl">Caratteristiche Arduino UNO</h1>
