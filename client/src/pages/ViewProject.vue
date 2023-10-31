@@ -80,7 +80,7 @@ function openProjectLink() {
       style="width: 99.5%"
       id="mainDIV"
     >
-      <div class="bg-neutral w-full rounded-lg lg:ml-2">
+      <div class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:ml-2">
         <div class="ml-2 mr-2 mt-3">
           <div class="flex ml-2">
             <img
@@ -129,7 +129,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         </div>
       </div>
       <div
-        class="bg-neutral w-full rounded-lg lg:col-span-3 h-full flex align-middle"
+        class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:col-span-3 h-full flex align-middle"
       >
         <div>
           <div

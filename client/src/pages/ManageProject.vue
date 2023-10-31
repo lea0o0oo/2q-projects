@@ -262,7 +262,7 @@ async function save() {
       class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4"
       style="width: 99.5%"
     >
-      <div class="bg-neutral w-full rounded-lg lg:ml-2">
+      <div class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:ml-2">
         <div class="ml-2 mr-2">
           <h3 class="font-bold text-2xl w-full text-center mt-2">Metadata</h3>
           <div class="divider"></div>
@@ -309,7 +309,7 @@ async function save() {
           </div>
         </div>
       </div>
-      <div class="bg-neutral w-full rounded-lg lg:col-span-3">
+      <div class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:col-span-3">
         <h3 class="font-bold text-2xl w-full text-center mt-2">Contenuto</h3>
         <div class="divider"></div>
         <div class="ml-2 mr-2">
