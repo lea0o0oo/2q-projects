@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 :root {
   --footer-h: 245px;
   --scrollbarBG: transparent;
@@ -30,4 +31,8 @@
   background-color: var(--scrollbarColor);
   border-radius: 14px;
   border: 3px solid var(--scrollbarBG);
+}
+
+* {
+  font-family: "Poppins", sans-serif;
 }

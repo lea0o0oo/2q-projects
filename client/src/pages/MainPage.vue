@@ -1,97 +1,256 @@
 <script setup>
+import { Carousel, initTE } from "tw-elements";
+import { onMounted } from "vue";
+
+onMounted(() => {
+  initTE({ Carousel });
+});
+
 const goto = (url) => {
   window.location.href = url;
 };
 </script>
 
+<style scoped>
+:root {
+  --carousel-h: 400px;
+}
+</style>
+
 <template>
-  <div
-    class="hero"
-    style="
-      background-image: url(https://i.pinimg.com/736x/f9/dd/b4/f9ddb48c4d9010e8333a319d0213ca35.jpg);
-      height: 20vh;
-    "
-  >
-    <div class="hero-overlay bg-opacity-60"></div>
-    <div class="hero-content text-center text-neutral-content">
-      <div class="max-w-md">
-        <h1 class="mb-5 text-6xl font-bold w-full text-white">
-          Progettare con arduino
-        </h1>
+  <!-- Hero -->
+  <div class="relative overflow-hidden">
+    <!-- Gradients -->
+    <div
+      aria-hidden="true"
+      class="flex absolute -top-96 left-1/2 transform -translate-x-1/2"
+    >
+      <div
+        class="bg-gradient-to-r from-violet-300/50 to-purple-100 blur-3xl w-[25rem] h-[44rem] rotate-[-60deg] transform -translate-x-[10rem] dark:from-violet-900/50 dark:to-purple-900"
+      ></div>
+      <div
+        class="bg-gradient-to-tl from-blue-50 via-blue-100 to-blue-50 blur-3xl w-[90rem] h-[50rem] rounded-fulls origin-top-left -rotate-12 -translate-x-[15rem] dark:from-indigo-900/70 dark:via-indigo-900/70 dark:to-blue-900/70"
+      ></div>
+    </div>
+    <!-- End Gradients -->
+
+    <div class="relative z-10">
+      <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+        <div class="max-w-2xl text-center mx-auto">
+          <!-- Title -->
+          <div class="mt-5 max-w-2xl">
+            <h1
+              class="block font-semibold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-gray-200"
+            >
+              Progettare con <br />
+              <span
+                class="bg-clip-text bg-gradient-to-tl from-green-600 to-blue-600 text-transparent"
+                >Arduino</span
+              >
+            </h1>
+          </div>
+          <!-- End Title -->
+
+          <div class="mt-5 max-w-3xl">
+            <p class="text-lg text-gray-600 dark:text-gray-400">
+              Qui troverete progetti basati su Arduino sviluppati dalla 2QIT
+              dell'IT Aldini Valeriani - disciplina Scienze e Tecnologie
+              Applicate
+            </p>
+          </div>
+
+          <!-- Buttons -->
+          <div class="mt-8 grid gap-3 w-full sm:inline-flex sm:justify-center">
+            <a
+              class="inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
+              href="/progetti"
+            >
+              Vedi progetti
+              <svg
+                class="w-3 h-3"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+              >
+                <path
+                  d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </a>
+          </div>
+          <!-- End Buttons -->
+        </div>
       </div>
     </div>
   </div>
-  <!-- Features -->
-  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-    <div class="aspect-w-16 aspect-h-7">
-      <div class="carousel w-full" style="height: 400px">
-        <div id="slide1" class="carousel-item relative w-full">
+  <!-- End Hero -->
+  <div
+    class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 w-full"
+    style="height: 500px"
+  >
+    <div>
+      <iframe
+        style="height: 100%; width: 100%"
+        class="rounded-tr-xl"
+        src="https://www.youtube-nocookie.com/embed/wKtu3txecQQ?si=ykM_HT0sIx2G_LcH"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div
+      id="carouselExampleCaptions"
+      class="relative rounded-tr-xl"
+      style="width: 100%; height: 500px"
+      data-te-carousel-init
+      data-te-ride="carousel"
+    >
+      <!--Carousel indicators-->
+      <div
+        class="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
+        data-te-carousel-indicators
+      >
+        <button
+          type="button"
+          data-te-target="#carouselExampleCaptions"
+          data-te-slide-to="0"
+          data-te-carousel-active
+          class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-te-target="#carouselExampleCaptions"
+          data-te-slide-to="1"
+          class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-te-target="#carouselExampleCaptions"
+          data-te-slide-to="2"
+          class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+
+      <!--Carousel items-->
+      <div
+        class="relative w-full overflow-hidden after:clear-both after:block after:content-['']"
+      >
+        <!--First item-->
+        <div
+          class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+          data-te-carousel-active
+          data-te-carousel-item
+          style="backface-visibility: hidden"
+        >
           <img
             src="https://img.freepik.com/premium-photo/breadboard-with-electrical-elements-wooden-table_181705-1111.jpg"
-            class="w-full"
-            style="object-fit: cover"
+            class="block w-full rounded-tl-xl"
+            style="height: 500px; object-fit: cover"
+            alt="..."
           />
           <div
-            class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
-          >
-            <a href="#slide3" class="btn btn-circle">❮</a>
-            <a href="#slide2" class="btn btn-circle">❯</a>
-          </div>
+            class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block"
+          ></div>
         </div>
-        <div id="slide2" class="carousel-item relative w-full">
-          <img
-            src="https://i.imgur.com/WXipW0o.png"
-            class="w-full"
-            style="object-fit: cover"
-          />
-          <div
-            class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
-          >
-            <a href="#slide1" class="btn btn-circle">❮</a>
-            <a href="#slide3" class="btn btn-circle">❯</a>
-          </div>
-        </div>
-        <div id="slide3" class="carousel-item relative w-full">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7zEeDqsYO2J-iDAjG-4bLrj5XE361BhIB8g&usqp=CAUdata:image/jpeg;base64,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"
-            class="w-full"
-            style="object-fit: cover"
-          />
-          <div
-            class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
-          >
-            <a href="#slide2" class="btn btn-circle">❮</a>
-            <a href="#slide1" class="btn btn-circle">❯</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Grid -->
-    <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
-      <div class="lg:col-span-1">
-        <h2
-          class="font-bold text-2xl md:text-3xl text-gray-800 dark:text-gray-200"
+        <!--Second item-->
+        <div
+          class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+          data-te-carousel-item
+          style="backface-visibility: hidden"
         >
-          Benvenuti nel nostro sito Web
-        </h2>
-        <p class="mt-2 md:mt-4 text-gray-500">
-          Qui troverete progetti basati su Arduino sviluppati dalla 2QIT dell'IT
-          Aldini Valeriani - disciplina Scienze e Tecnologie Applicate
-        </p>
-      </div>
-      <!-- End Col -->
-
-      <div class="lg:col-span-2">
-        <div class="flex w-full h-full justify-center">
-          <button class="btn btn-primary" @click="goto('/progetti')">
-            Vedi progetti
-          </button>
+          <img
+            src="/board.jpeg"
+            class="block w-full rounded-tl-xl"
+            alt="..."
+            style="height: 500px; object-fit: cover"
+          />
+          <div
+            class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block"
+          ></div>
+        </div>
+        <!--Third item-->
+        <div
+          class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+          data-te-carousel-item
+          style="backface-visibility: hidden"
+        >
+          <img
+            src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(23).jpg"
+            class="block w-full rounded-tl-xl"
+            alt="..."
+            style="height: 500px; object-fit: cover"
+          />
+          <div
+            class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block"
+          ></div>
         </div>
       </div>
-      <!-- End Col -->
+
+      <!--Carousel controls - prev item-->
+      <button
+        class="absolute bottom-0 left-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        data-te-target="#carouselExampleCaptions"
+        data-te-slide="prev"
+      >
+        <span class="inline-block h-8 w-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            />
+          </svg>
+        </span>
+        <span
+          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+          >Previous</span
+        >
+      </button>
+      <!--Carousel controls - next item-->
+      <button
+        class="absolute bottom-0 right-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        data-te-target="#carouselExampleCaptions"
+        data-te-slide="next"
+      >
+        <span class="inline-block h-8 w-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
+        </span>
+        <span
+          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+          >Next</span
+        >
+      </button>
     </div>
-    <!-- End Grid -->
   </div>
-  <!-- End Features -->
 </template>
