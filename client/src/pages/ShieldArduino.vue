@@ -7,7 +7,7 @@
         <img
           src="https://j6z7x9q7.rocketcdn.me/wp-content/uploads/2019/07/Arduino_Uno_4_web.jpg"
           class="rounded-lg"
-          style="height: 80%; width: auto"
+          style="height: 80%; width: auto; object-fit: cover"
         />
       </div>
       <div class="mt-2">
