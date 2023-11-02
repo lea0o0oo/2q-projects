@@ -76,6 +76,7 @@ utils.onLoad(() => {
           document.getElementById("project-image").src;
         utils.getById("project-html").value = projectData.content.customHTML;
         utils.getById("project-iframe").value = projectData.content.iframe;
+        loadCSVFile(projectData.content.csv, "tableCSV", true);
 
         utils.getById("modal_loading").checked = false;
       });
@@ -114,6 +115,7 @@ let projectIcon;
 let projectImage;
 let iconData;
 let imageData;
+let globalCsvData = "";
 
 utils.onLoad(() => {
   projectIcon = document.getElementById("project-icon");
@@ -193,6 +195,7 @@ async function save() {
       image: imageData,
       iframe: utils.getById("project-iframe").value,
       customHTML: utils.getById("project-html").value,
+      csv: globalCsvData,
     },
   };
 
@@ -252,6 +255,98 @@ async function save() {
         utils.getById("save-btn").disabled = false;
       });
   }
+}
+
+function loadCSVFile(file, tableId, asText) {
+  document.getElementById(tableId).innerHTML = "";
+  var reader = new FileReader();
+
+  reader.onload = function (e) {
+    var csvData = asText ? file : e.target.result;
+    var rows = csvData.split("\n");
+
+    var table = document.getElementById(tableId);
+    var thead = document.createElement("thead");
+    var tbody = document.createElement("tbody");
+
+    var headerRow = rows[0].split(",");
+    var dataRows = rows.slice(1);
+
+    var tableHeaderRow = document.createElement("tr");
+    headerRow.forEach(function (cell) {
+      var tableHeaderCell = document.createElement("th");
+      tableHeaderCell.textContent = cell;
+      tableHeaderRow.appendChild(tableHeaderCell);
+    });
+
+    thead.appendChild(tableHeaderRow);
+
+    dataRows.forEach(function (row) {
+      var cells = row.split(",");
+      var tableRow = document.createElement("tr");
+
+      cells.forEach(function (cell) {
+        var cellValue = cell.replace(/^"(.*)"$/, "\$1");
+
+        var tableCell = document.createElement("td");
+        tableCell.textContent = cellValue;
+        tableRow.appendChild(tableCell);
+      });
+
+      tbody.appendChild(tableRow);
+    });
+
+    table.appendChild(thead);
+    table.appendChild(tbody);
+  };
+
+  if (asText) {
+    reader.onload(null);
+  } else {
+    reader.readAsText(file);
+  }
+}
+
+utils.onLoad(() => {
+  // Usage example
+  var fileInput = document.getElementById("project-csv-picker");
+  fileInput.addEventListener("change", function (e) {
+    var file = e.target.files[0];
+    loadCSVFile(file, "tableCSV");
+  });
+});
+
+function delProject() {
+  Swal.fire({
+    title: "Sei sicuro?",
+    text: "Questa azione è irreversibile",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Continua",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      utils.getById("modal_loading").checked = true;
+      axios
+        .delete(`${config.api.baseURL}/deleteProject`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          data: {
+            projectId: router.params.projectId,
+          },
+        })
+        .then((response) => {
+          window.location.href = "/dashboard";
+        })
+        .catch((error) => {
+          console.error(error);
+          utils.getById("modal_loading").checked = false;
+          Swal.fire("Errore", error.response.data.error, "error");
+        });
+    }
+  });
 }
 </script>
 
@@ -353,6 +448,20 @@ async function save() {
               />
             </div>
             <div>
+              <p class="font-bold text-xl mb-2">Tabella CSV</p>
+              <input
+                type="file"
+                class="file-input file-input-bordered w-full mb-3 input-primary"
+                accept=".csv"
+                id="project-csv-picker"
+              />
+              <div class="overflow-x-auto" style="max-height: 400px">
+                <table class="table table-zebra" id="tableCSV">
+                  <!-- head -->
+                </table>
+              </div>
+            </div>
+            <div>
               <p class="font-bold text-xl mb-2">Salva</p>
               <button
                 class="btn btn-block btn-accent"
@@ -362,9 +471,20 @@ async function save() {
                 Salva
               </button>
             </div>
+            <div>
+              <p class="font-bold text-xl mb-2">Elimina</p>
+              <button
+                class="btn btn-block btn-error"
+                @click="delProject()"
+                id="save-btn"
+              >
+                Elimina
+              </button>
+            </div>
           </div>
-          <h4>HTML Custom</h4>
+
           <div class="divider"></div>
+          <h4>HTML Custom</h4>
           <p>// TODO: Sostituire la textArea con CodeMirror</p>
           <textarea
             class="textarea textarea-secondary w-full h-full"

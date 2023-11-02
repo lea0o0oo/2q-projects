@@ -8,5 +8,6 @@ router.use("/", require("./account/login"));
 router.use("/", require("./account/checkJWT"));
 router.use("/", require("./actions/createProject"));
 router.use("/", require("./actions/updateProject"));
+router.use("/", require("./actions/deleteProject"));
 
 module.exports = router;

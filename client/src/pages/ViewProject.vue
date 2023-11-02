@@ -3,6 +3,57 @@ import config from "../../config";
 import axios from "axios";
 import utils from "../helpers/utils";
 import { useRoute } from "vue-router";
+import Swal from "sweetalert2";
+
+function loadCSVFile(file, tableId, asText) {
+  document.getElementById(tableId).innerHTML = "";
+  var reader = new FileReader();
+
+  reader.onload = function (e) {
+    var csvData = asText ? file : e.target.result;
+    var rows = csvData.split("\n");
+
+    var table = document.getElementById(tableId);
+    var thead = document.createElement("thead");
+    var tbody = document.createElement("tbody");
+
+    var headerRow = rows[0].split(",");
+    var dataRows = rows.slice(1);
+
+    var tableHeaderRow = document.createElement("tr");
+    headerRow.forEach(function (cell) {
+      var tableHeaderCell = document.createElement("th");
+      tableHeaderCell.textContent = cell;
+      tableHeaderRow.appendChild(tableHeaderCell);
+    });
+
+    thead.appendChild(tableHeaderRow);
+
+    dataRows.forEach(function (row) {
+      var cells = row.split(",");
+      var tableRow = document.createElement("tr");
+
+      cells.forEach(function (cell) {
+        var cellValue = cell.replace(/^"(.*)"$/, "\$1");
+
+        var tableCell = document.createElement("td");
+        tableCell.textContent = cellValue;
+        tableRow.appendChild(tableCell);
+      });
+
+      tbody.appendChild(tableRow);
+    });
+
+    table.appendChild(thead);
+    table.appendChild(tbody);
+  };
+
+  if (asText) {
+    reader.onload(null);
+  } else {
+    reader.readAsText(file);
+  }
+}
 
 const route = useRoute();
 let projectData;
@@ -58,7 +109,29 @@ utils.onLoad(() => {
       utils.getById("loadingDIV").classList.add("hidden");
       utils.getById("mainDIV").classList.remove("hidden");
       utils.getById("mainDIV").classList.add("grid");
+
+      loadCSVFile(projectData.content.csv, "table-thing", true);
+
+      if (utils.isEmpty(projectData.content.iframe)) {
+        utils.getById("project-iframe").classList.add("hidden");
+      }
+      if (utils.isEmpty(projectData.content.image)) {
+        utils.getById("project-image").classList.add("hidden");
+        document.getElementById("table-div").classList.add("col-span-2");
+        document.getElementById("table-div").classList.add("w-full");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire("Errore", error.response.data.error, "error");
     });
+});
+
+utils.onLoad(() => {
+  const interval = setInterval(() => {
+    utils.getById("lbl-stay").classList.remove("hidden");
+    clearInterval(interval);
+  }, 4000);
 });
 
 function openProjectLink() {
@@ -68,19 +141,25 @@ function openProjectLink() {
 
 <template>
   <div class="w-full mb-10">
-    <div
-      id="loadingDIV"
-      class="flex w-full justify-center"
-      style="height: calc(100vh - 275px)"
-    >
-      <span class="loading loading-bars loading-lg"></span>
+    <div id="loadingDIV" class="flex w-full justify-center" style="">
+      <div>
+        <div class="flex w-full justify-center">
+          <span class="loading loading-bars loading-lg"></span>
+        </div>
+        <p class="mt-4 hidden" id="lbl-stay">
+          Potrebbe richiedere un po' di tempo...
+        </p>
+      </div>
     </div>
     <div
-      class="grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4 hidden"
+      class="grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4 hidden h-full"
       style="width: 99.5%"
       id="mainDIV"
     >
-      <div class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:ml-2">
+      <div
+        class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:ml-2 h-full"
+        style="min-height: 80vh"
+      >
         <div class="ml-2 mr-2 mt-3">
           <div class="flex ml-2">
             <img
@@ -129,13 +208,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         </div>
       </div>
       <div
-        class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:col-span-3 h-full flex align-middle"
+        class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:col-span-3 h-full flex align-middle h-full"
       >
         <div>
-          <div
-            class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 ml-2 mt-3"
-          >
-            <div class="w-full flex justify-center">
+          <div class="grid md:grid-cols-1 grid-cols-1 lg:grid-cols-2 gap-3">
+            <div class="flex w-full justify-center">
               <img
                 src="https://i1.wp.com/potafiori.com/wp-content/uploads/2020/04/placeholder.png"
                 style="width: 100%; height: auto; object-fit: cover"
@@ -144,18 +221,28 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 onclick="modal_see_img.showModal()"
               />
             </div>
-            <div style="height: 700px" class="rounded-lg">
-              <iframe
-                id="project-iframe"
-                src=""
-                class="w-full h-full"
-                sandbox="allow-same-origin allow-scripts"
-              />
+
+            <div
+              class="overflow-x-auto h-full rouned-xl mt-4 md:mt-4 lg:mt-0"
+              style="max-height: 400px"
+              id="table-div"
+            >
+              <table class="table table-zebra" id="table-thing"></table>
             </div>
           </div>
-          <div id="htmlDIV" class="w-full"></div>
+          <div class="flex w-full justify-center mt-5">
+            <iframe
+              id="project-iframe"
+              style="width: 100%; height: 500px"
+              src=""
+              class="w-full h-full rounded-xl"
+              sandbox="allow-same-origin allow-scripts"
+            />
+          </div>
         </div>
       </div>
+
+      <div id="htmlDIV" class="w-full"></div>
     </div>
   </div>
 

@@ -6,7 +6,9 @@ import Navbar from "./components/Navbar.vue";
 </script>
 
 <template>
-  <Navbar />
-  <router-view></router-view>
-  <PiediMLMLLL />
+  <div class="global-container">
+    <Navbar />
+    <router-view></router-view>
+    <PiediMLMLLL />
+  </div>
 </template>
