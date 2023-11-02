@@ -26,7 +26,7 @@ axios.get(`${config.api.baseURL}/getProjects/?page=1`).then((response) => {
 </script>
 
 <template>
-  <div style="width: 100%">
+  <div style="height: calc(100vh - var(--footer-h)); width: 100%">
     <h1 class="w-full text-center font-bold text-4xl mt-3">Dashboard</h1>
     <div class="flex w-full justify-center mt-10" id="loadingDIV">
       <span class="loading loading-bars loading-lg"></span>
