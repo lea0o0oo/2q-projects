@@ -120,6 +120,11 @@ utils.onLoad(() => {
         document.getElementById("table-div").classList.add("col-span-2");
         document.getElementById("table-div").classList.add("w-full");
       }
+      if (utils.isEmpty(projectData.content.csv)) {
+        utils.getById("table-div").classList.add("hidden");
+        document.getElementById("img-div").classList.add("col-span-2");
+        document.getElementById("project-image").style.width = "70%";
+      }
     })
     .catch((error) => {
       console.error(error);
@@ -212,7 +217,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       >
         <div>
           <div class="grid md:grid-cols-1 grid-cols-1 lg:grid-cols-2 gap-3">
-            <div class="flex w-full justify-center">
+            <div class="flex w-full justify-center" id="img-div">
               <img
                 src="https://i1.wp.com/potafiori.com/wp-content/uploads/2020/04/placeholder.png"
                 style="width: 100%; height: auto; object-fit: cover"

@@ -182,6 +182,7 @@ async function save() {
 
   await fetchIconData();
   await fetchImageData();
+  console.log(globalCsvData);
 
   projectStructure = {
     metadata: {
@@ -264,6 +265,7 @@ function loadCSVFile(file, tableId, asText) {
   reader.onload = function (e) {
     var csvData = asText ? file : e.target.result;
     var rows = csvData.split("\n");
+    globalCsvData = csvData;
 
     var table = document.getElementById(tableId);
     var thead = document.createElement("thead");
