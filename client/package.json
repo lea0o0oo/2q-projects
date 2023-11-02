@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@splinetool/runtime": "^0.9.490",
+    "@splinetool/runtime": "^0.9.492",
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.0",

@@ -183,6 +183,7 @@ function openProjectLink() {
           </div>
           <div class="divider"></div>
 
+          <h2 class="font-bold text-2xl mt-5">Descrizione</h2>
           <pre
             class="mt-5 ml-2"
             style="white-space: pre-wrap; overflow-y: auto; max-height: 30vh"
@@ -191,10 +192,10 @@ function openProjectLink() {
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla urna porttitor rhoncus dolor. Commodo elit at imperdiet dui accumsan sit amet nulla facilisi. Interdum velit euismod in pellentesque massa placerat. Et netus et malesuada fames ac turpis egestas maecenas pharetra. Convallis convallis tellus id interdum velit laoreet id. Habitant morbi tristique senectus et netus et malesuada fames ac. Urna nunc id cursus metus aliquam eleifend mi. Odio euismod lacinia at quis risus sed. Duis at consectetur lorem donec massa sapien faucibus et. Suspendisse in est ante in nibh. Tortor aliquam nulla facilisi cras. Sit amet massa vitae tortor. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Fermentum leo vel orci porta non. Integer feugiat scelerisque varius morbi enim nunc. Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Nibh nisl condimentum id venenatis a condimentum vitae sapien pellentesque. Sollicitudin nibh sit amet commodo nulla facilisi. Diam sollicitudin tempor id eu.</pre
           >
 
-          <h4 class="font-bold text-xl mt-10">Data</h4>
+          <h4 class="font-bold text-2xl mt-10">Data</h4>
           <p id="project-date">[DATA]</p>
           <div id="links-div" class="mb-3">
-            <h2 class="font-bold text-3xl mt-5">Link</h2>
+            <h2 class="font-bold text-2xl mt-5">Link</h2>
             <button class="btn" @click="openProjectLink()">
               Link del progetto
               <svg
