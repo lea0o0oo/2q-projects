@@ -4,48 +4,48 @@ import axios from "axios";
 import utils from "../helpers/utils";
 import { useRoute } from "vue-router";
 import Swal from "sweetalert2";
+import Papa from "papaparse";
 
 function loadCSVFile(file, tableId, asText) {
-  document.getElementById(tableId).innerHTML = "";
   var reader = new FileReader();
 
   reader.onload = function (e) {
     var csvData = asText ? file : e.target.result;
-    var rows = csvData.split("\n");
 
-    var table = document.getElementById(tableId);
-    var thead = document.createElement("thead");
-    var tbody = document.createElement("tbody");
+    Papa.parse(csvData, {
+      header: true,
+      complete: function (results) {
+        var table = document.getElementById(tableId);
+        var thead = document.createElement("thead");
+        var tbody = document.createElement("tbody");
 
-    var headerRow = rows[0].split(",");
-    var dataRows = rows.slice(1);
+        var headerRow = results.data[0];
+        var dataRows = results.data.slice(1);
 
-    var tableHeaderRow = document.createElement("tr");
-    headerRow.forEach(function (cell) {
-      var tableHeaderCell = document.createElement("th");
-      tableHeaderCell.textContent = cell;
-      tableHeaderRow.appendChild(tableHeaderCell);
+        var tableHeaderRow = document.createElement("tr");
+        Object.keys(headerRow).forEach(function (key) {
+          var tableHeaderCell = document.createElement("th");
+          tableHeaderCell.textContent = headerRow[key];
+          tableHeaderRow.appendChild(tableHeaderCell);
+        });
+
+        thead.appendChild(tableHeaderRow);
+
+        dataRows.forEach(function (row) {
+          var tableRow = document.createElement("tr");
+          Object.values(row).forEach(function (cell) {
+            var tableCell = document.createElement("td");
+            tableCell.textContent = cell;
+            tableRow.appendChild(tableCell);
+          });
+
+          tbody.appendChild(tableRow);
+        });
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+      },
     });
-
-    thead.appendChild(tableHeaderRow);
-
-    dataRows.forEach(function (row) {
-      var cells = row.split(",");
-      var tableRow = document.createElement("tr");
-
-      cells.forEach(function (cell) {
-        var cellValue = cell.replace(/^"(.*)"$/, "\$1");
-
-        var tableCell = document.createElement("td");
-        tableCell.textContent = cellValue;
-        tableRow.appendChild(tableCell);
-      });
-
-      tbody.appendChild(tableRow);
-    });
-
-    table.appendChild(thead);
-    table.appendChild(tbody);
   };
 
   if (asText) {
