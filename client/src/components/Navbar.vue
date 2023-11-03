@@ -95,10 +95,9 @@ function gotoURL(url) {
           >Progetti 2QIT</a
         >
         <button
-          class="btn btn-ghost btn-circle ml-0"
-          title="Cerca progetti"
+          class="btn btn-ghost btn-circle"
           data-hs-overlay="#modal-search"
-          @click="showSearch()"
+          title="Cerca progetti"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -115,6 +114,7 @@ function gotoURL(url) {
             />
           </svg>
         </button>
+
         <div class="sm:hidden">
           <button
             type="button"
