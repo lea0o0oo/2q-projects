@@ -131,6 +131,11 @@ utils.onLoad(() => {
 
         utils.getById("modal_loading").checked = false;
       });
+  } else {
+    editor = new EditorView({
+      state,
+      parent: utils.getById("editorDIV"),
+    });
   }
 });
 
