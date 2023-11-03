@@ -22,24 +22,28 @@ function loadCSVFile(file, tableId, asText) {
         var headerRow = results.data[0];
         var dataRows = results.data.slice(1);
 
-        var tableHeaderRow = document.createElement("tr");
-        Object.keys(headerRow).forEach(function (key) {
-          var tableHeaderCell = document.createElement("th");
-          tableHeaderCell.textContent = headerRow[key];
-          tableHeaderRow.appendChild(tableHeaderCell);
-        });
-
-        thead.appendChild(tableHeaderRow);
-
-        dataRows.forEach(function (row) {
-          var tableRow = document.createElement("tr");
-          Object.values(row).forEach(function (cell) {
-            var tableCell = document.createElement("td");
-            tableCell.textContent = cell;
-            tableRow.appendChild(tableCell);
+        if (headerRow) {
+          var tableHeaderRow = document.createElement("tr");
+          Object.keys(headerRow).forEach(function (key) {
+            var tableHeaderCell = document.createElement("th");
+            tableHeaderCell.textContent = key;
+            tableHeaderRow.appendChild(tableHeaderCell);
           });
 
-          tbody.appendChild(tableRow);
+          thead.appendChild(tableHeaderRow);
+        }
+
+        dataRows.forEach(function (row) {
+          if (Object.values(row).some((cell) => cell.trim() !== "")) {
+            var tableRow = document.createElement("tr");
+            Object.values(row).forEach(function (cell) {
+              var tableCell = document.createElement("td");
+              tableCell.textContent = cell;
+              tableRow.appendChild(tableCell);
+            });
+
+            tbody.appendChild(tableRow);
+          }
         });
 
         table.appendChild(thead);
@@ -49,7 +53,8 @@ function loadCSVFile(file, tableId, asText) {
   };
 
   if (asText) {
-    reader.onload(null);
+    var blob = new Blob([file], { type: "text/csv" });
+    reader.readAsText(blob);
   } else {
     reader.readAsText(file);
   }
