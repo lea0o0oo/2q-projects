@@ -1,5 +1,7 @@
 export default {
   api: {
-    baseURL: "https://2q-projects-backend.vercel.app",
+    baseURL: import.meta.env.DEV
+      ? "http://localhost:3001"
+      : "https://2q-projects-backend.vercel.app",
   },
 };

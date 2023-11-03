@@ -264,6 +264,7 @@ function loadCSVFile(file, tableId, asText) {
 
   reader.onload = function (e) {
     var csvData = asText ? file : e.target.result;
+    globalCsvData = csvData;
 
     Papa.parse(csvData, {
       header: true,
@@ -307,7 +308,6 @@ function loadCSVFile(file, tableId, asText) {
     reader.readAsText(file);
   }
 }
-
 utils.onLoad(() => {
   // Usage example
   var fileInput = document.getElementById("project-csv-picker");
