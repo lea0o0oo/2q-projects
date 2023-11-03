@@ -2,6 +2,9 @@
 
 Questa api viene utilizzata per recuperare i progetti dal database
 
+La versione pubblica di essa è disponibile all'indirizzo <br />
+[https://2q-projects-backend.vercel.app](https://2q-projects-backend.vercel.app)
+
 ## Setup
 
 La api utilizza come database mongodb.<br />
