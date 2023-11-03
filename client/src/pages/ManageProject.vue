@@ -7,6 +7,50 @@ import config from "../../config";
 import checkJWT from "../helpers/checkJWT";
 import Papa from "papaparse";
 
+import { syntaxHighlighting } from "@codemirror/language";
+import { keymap } from "@codemirror/view";
+
+import { indentWithTab } from "@codemirror/commands";
+import { basicSetup, EditorView } from "codemirror";
+import { EditorState, Compartment } from "@codemirror/state";
+import { html } from "@codemirror/lang-html";
+import {
+  oneDarkTheme,
+  oneDarkHighlightStyle,
+} from "@codemirror/theme-one-dark";
+
+let language = new Compartment(),
+  tabSize = new Compartment();
+
+const fixedHeightEditor = EditorView.theme({
+  ".cm-content, .cm-gutter": { minHeight: "500px" },
+  "&": { maxHeight: "500px" },
+  ".cm-scroller": { overflow: "auto" },
+});
+
+let editor;
+
+let state = {
+  extensions: [
+    basicSetup,
+    oneDarkTheme,
+    syntaxHighlighting(oneDarkHighlightStyle),
+    keymap.of([indentWithTab]),
+    fixedHeightEditor,
+    language.of(html()),
+    tabSize.of(EditorState.tabSize.of(8)),
+    EditorView.updateListener.of((v) => {
+      if (v.docChanged) {
+        updateHTML();
+      }
+    }),
+  ],
+};
+
+function updateHTML() {
+  utils.getById("previewDIV").innerHTML = editor.state.doc.toString();
+}
+
 checkJWT();
 
 const Toast = Swal.mixin({
@@ -75,7 +119,13 @@ utils.onLoad(() => {
 
         document.getElementById("image-fullscreen").src =
           document.getElementById("project-image").src;
-        utils.getById("project-html").value = projectData.content.customHTML;
+        state.doc = projectData.content.customHTML;
+        state = EditorState.create(state);
+        editor = new EditorView({
+          state,
+          parent: utils.getById("editorDIV"),
+        });
+        utils.getById("previewDIV").innerHTML = editor.state.doc.toString();
         utils.getById("project-iframe").value = projectData.content.iframe;
         loadCSVFile(projectData.content.csv, "tableCSV", true);
 
@@ -183,7 +233,6 @@ async function save() {
 
   await fetchIconData();
   await fetchImageData();
-  console.log(globalCsvData);
 
   projectStructure = {
     metadata: {
@@ -196,7 +245,7 @@ async function save() {
       projectLink: utils.getById("project-link").value,
       image: imageData,
       iframe: utils.getById("project-iframe").value,
-      customHTML: utils.getById("project-html").value,
+      customHTML: editor.state.doc.toString(),
       csv: globalCsvData,
     },
   };
@@ -321,6 +370,12 @@ utils.onLoad(() => {
     var file = e.target.files[0];
     loadCSVFile(file, "tableCSV");
   });
+});
+
+utils.onLoad(() => {
+  if (router.params.projectId == "new") {
+    utils.getById("del-proj-div").classList.add("hidden");
+  }
 });
 
 function delProject() {
@@ -478,7 +533,7 @@ function delProject() {
                 Salva
               </button>
             </div>
-            <div>
+            <div id="del-proj-div">
               <p class="font-bold text-xl mb-2">Elimina</p>
               <button
                 class="btn btn-block btn-error"
@@ -492,9 +547,10 @@ function delProject() {
 
           <div class="divider"></div>
           <h4>HTML Custom</h4>
-          <p>// TODO: Sostituire la textArea con CodeMirror</p>
+          <div id="editorDIV" class="w-full" style="height: 500px"></div>
+          <div id="previewDIV" class="prose lg:prose-xl"></div>
           <textarea
-            class="textarea textarea-secondary w-full h-full"
+            class="textarea textarea-secondary w-full h-full hidden"
             style="min-height: 300px"
             placeholder="<h1>aa</h1>"
             id="project-html"

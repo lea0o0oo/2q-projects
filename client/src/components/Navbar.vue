@@ -6,7 +6,6 @@ import axios from "axios";
 import config from "../../config";
 
 const router = useRoute();
-console.log(window.location.pathname);
 if (window.location.pathname != "/") {
   document.addEventListener("DOMContentLoaded", () => {
     document
@@ -40,6 +39,9 @@ utils.onLoad(() => {
   if (localStorage.getItem("token") != null) {
     document.getElementById("account-login").classList.add("hidden");
     document.getElementById("account-manage").classList.remove("hidden");
+    try {
+      utils.getById("admin-div").classList.remove("hidden");
+    } catch (e) {}
     axios
       .post(
         `${config.api.baseURL}/account/checkJWT`,
@@ -54,6 +56,10 @@ utils.onLoad(() => {
         if (e.response.data.success == false) {
           document.getElementById("account-login").classList.remove("hidden");
           document.getElementById("account-manage").classList.add("hidden");
+          localStorage.removeItem("token");
+          try {
+            utils.getById("admin-div").classList.add("hidden");
+          } catch (e) {}
         }
       });
   }
@@ -66,6 +72,10 @@ function showSearch() {
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "/";
+}
+
+function gotoURL(url) {
+  window.location.href = url;
 }
 </script>
 
@@ -192,6 +202,7 @@ function logout() {
             <button
               type="button"
               class="flex cursor-pointer items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 sm:border-l sm:border-gray-300 sm:pl-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
+              @click="gotoURL('/dashboard')"
             >
               <svg
                 class="w-4 h-4 mr-3"
