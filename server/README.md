@@ -47,7 +47,7 @@ Dal file example.env, creane un altro chiamato '.env', ma in quest'ultimo mettic
         "__v": 0
       }
     ],
-    "totalDocs": 1, // Risultati
+    "totalDocs": 1, // Totale di risultati su tuttle le pagine
     "limit": 6, // Limite di risultati
     "totalPages": 1, // Pagine totali
     "page": 1, // Pagina attuale
