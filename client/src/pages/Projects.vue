@@ -4,19 +4,45 @@ import config from "../../config";
 import utils from "../helpers/utils";
 import cardTemplate from "./mainDashProjectCardTemplate";
 
-utils.onLoad(() => {
-  axios.get(`${config.api.baseURL}/getProjects`).then((response) => {
-    utils.getById("projectsContainer").innerHTML = "";
-    response.data.result.docs.forEach((doc) => {
-      console.log(doc);
-      utils.getById("projectsContainer").innerHTML += cardTemplate(
-        doc.name,
-        utils.readableDate(doc.projectCreated),
-        `/view/${doc._id}`
-      );
+let currentPage = 1;
+let maxPages = 1;
+
+function loadProjects(page) {
+  utils.getById("projectsContainer").innerHTML =
+    '<div class="lg:col-span-4 md:col-span-3 flex justify-center"><span class="loading loading-bars loading-lg"></span></div>';
+  axios
+    .get(`${config.api.baseURL}/getProjects/?page=${page}`)
+    .then((response) => {
+      utils.getById("projectsContainer").innerHTML = "";
+      maxPages = response.data.result.totalPages;
+      utils.getById(
+        "pagination-info"
+      ).innerText = `${response.data.result.page} / ${response.data.result.totalPages}`;
+      response.data.result.docs.forEach((doc) => {
+        utils.getById("projectsContainer").innerHTML += cardTemplate(
+          doc.name,
+          utils.readableDate(doc.projectCreated),
+          `/view/${doc._id}`
+        );
+      });
     });
-  });
+}
+
+utils.onLoad(() => {
+  loadProjects(1);
 });
+
+function nextpage() {
+  currentPage++;
+  if (currentPage >= maxPages) currentPage = maxPages;
+  loadProjects(currentPage);
+}
+
+function prevPage() {
+  currentPage--;
+  if (currentPage <= 1) currentPage = 1;
+  loadProjects(currentPage);
+}
 </script>
 
 <template>
@@ -48,8 +74,9 @@ utils.onLoad(() => {
         Cerca
       </button>
     </div>
+    <div style="height: 100%"></div>
 
-    <div style="height: 50vh">
+    <div>
       <!-- Card Section -->
       <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Grid -->
@@ -88,7 +115,7 @@ utils.onLoad(() => {
 -->
 
       <div class="flex align-middle justify-center">
-        <button class="btn btn-circle mb-3">
+        <button class="btn btn-circle mb-3" @click="prevPage()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
@@ -120,8 +147,8 @@ utils.onLoad(() => {
             </g>
           </svg>
         </button>
-        <p class="mt-3 ml-2 mr-2 font-bold">1/10</p>
-        <button class="btn btn-circle mb-3">
+        <p class="mt-3 ml-2 mr-2 font-bold" id="pagination-info">- / -</p>
+        <button class="btn btn-circle mb-3" @click="nextpage()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"

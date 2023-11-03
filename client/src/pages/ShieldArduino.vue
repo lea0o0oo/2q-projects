@@ -5,7 +5,7 @@ import utils from "../helpers/utils";
 utils.onLoad(() => {
   const canvas = document.getElementById("canvas3d");
   const app = new Application(canvas);
-  app.load("https://draft.spline.design/CFUIqwVhzrq0vtKa/scene.splinecode");
+  app.load("https://draft.spline.design/zuKGdO5PU3fdKhUW/scene.splinecode");
 });
 </script>
 
