@@ -15,7 +15,7 @@ router.post("/createProject", checkJWT, async (req, res) => {
   if (await Project.exists({ name: req.body.projectData.metadata.name })) {
     res.status(409).json({
       success: false,
-      error: "A project with the same name already exists",
+      error: "Esiste già un progetto con lo stesso nome",
     });
     return;
   }

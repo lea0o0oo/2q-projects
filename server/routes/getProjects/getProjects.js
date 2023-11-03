@@ -8,6 +8,14 @@ router.get("/getProjects", async (req, res) => {
   let limit = req.query.limit
     ? req.query.limit
     : config.projects.resultsPerPage;
+  if (Number(limit) > config.projects.resultsPerPage) {
+    res.status(422).json({
+      success: false,
+      error:
+        "Il limite massimo accettabile è " + config.projects.resultsPerPage,
+    });
+    return;
+  }
 
   try {
     IndexProjects.paginate(
