@@ -132,6 +132,7 @@ utils.onLoad(() => {
         utils.getById("modal_loading").checked = false;
       });
   } else {
+    state = EditorState.create(state);
     editor = new EditorView({
       state,
       parent: utils.getById("editorDIV"),
