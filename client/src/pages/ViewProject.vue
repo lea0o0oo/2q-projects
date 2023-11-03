@@ -242,7 +242,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
               style="width: 100%; height: 500px"
               src=""
               class="w-full h-full rounded-xl"
-              sandbox="allow-same-origin allow-scripts"
             />
           </div>
         </div>

@@ -5,6 +5,12 @@
     <aside>
       <p class="font-bold">
         Sito Web sviluppato dagli studenti della classe 2QIT a.s. 2023/24
+        <input
+          type="checkbox"
+          checked
+          id="search-focues"
+          class="checkbox hidden"
+        />
       </p>
     </aside>
     <nav>

@@ -32,6 +32,10 @@ if (window.location.pathname != "/") {
       );
   });
 }
+
+function showSearch() {
+  document.getElementById("search-focues").click();
+}
 </script>
 
 <template>
@@ -53,6 +57,7 @@ if (window.location.pathname != "/") {
           class="btn btn-ghost btn-circle ml-0"
           title="Cerca progetti"
           data-hs-overlay="#modal-search"
+          @click="showSearch()"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -158,13 +163,13 @@ if (window.location.pathname != "/") {
     class="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto"
   >
     <div
-      class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto h-[calc(100%-3.5rem)] min-h-[calc(100%-3.5rem)] flex items-center w-full"
+      class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto h-[calc(100%-3.5rem)] min-h-[calc(100%-3.5rem)] flex items-center"
     >
       <div
-        class="max-h-full overflow-hidden flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] w-full"
+        class="max-h-full w-full overflow-hidden flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]"
       >
         <div
-          class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700 w-full"
+          class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700"
         >
           <h3 class="font-bold text-gray-800 dark:text-white">
             Cerca progetti
@@ -191,11 +196,10 @@ if (window.location.pathname != "/") {
           </button>
         </div>
         <div class="p-4 overflow-y-auto">
-          <div class="space-y-4">
-            <Search />
-          </div>
+          <Search />
         </div>
       </div>
     </div>
   </div>
+  <!-- End Modal -->
 </template>

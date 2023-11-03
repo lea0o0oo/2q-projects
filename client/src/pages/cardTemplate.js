@@ -4,8 +4,8 @@
  * @param {string} link Link where the card will redirect
  */
 export default (name, date, link) => {
-  return `<div><a
-  class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-gray-800 dark:border-gray-800"
+  return `<div class="mb-2"><a
+  class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-gray-900 dark:border-gray-800"
   href="${link}"
   >
   <div class="p-4 md:p-5">
