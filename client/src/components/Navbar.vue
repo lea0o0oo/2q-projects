@@ -167,6 +167,7 @@ function showSearch() {
     >
       <div
         class="max-h-full w-full overflow-hidden flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]"
+        style="min-height: 820px"
       >
         <div
           class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700"

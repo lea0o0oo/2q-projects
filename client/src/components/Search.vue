@@ -32,6 +32,7 @@ function startSearch(query, page) {
 utils.onLoad(() => {
   utils.getById("search-focues").addEventListener("change", () => {
     startSearch("", 1);
+    utils.getById("input-search").value = "";
   });
   utils.getById("input-search").addEventListener("keydown", (event) => {
     if (event.key === "Enter") {

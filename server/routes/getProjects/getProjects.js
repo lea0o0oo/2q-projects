@@ -15,6 +15,7 @@ router.get("/getProjects", async (req, res) => {
       {
         page: req.query.page,
         limit: limit,
+        sort: { projectCreated: -1 },
       }
     ).then((result) => {
       res.status(200).json({
