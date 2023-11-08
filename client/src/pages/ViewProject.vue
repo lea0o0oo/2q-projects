@@ -203,7 +203,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             <div id="links-div" class="mb-3">
               <h2 class="font-bold text-2xl mt-5">Link</h2>
               <button
-                class="btn btn-success btn-outline"
+                class="btn btn-success dark:btn-outline"
                 @click="openProjectLink()"
               >
                 Link del progetto
