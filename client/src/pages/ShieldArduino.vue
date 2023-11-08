@@ -25,8 +25,11 @@ utils.onLoad(() => {
       </p>
       <p class="mt-3 text-xl">
         La ram è integrata all'interno del microcontrollore ed è di
-        <strong>32KB</strong>, mentre il clock, anche esso integrato
-        all'interno, ha una frequenza di <strong>16 MHz</strong>.
+        <strong>32KB</strong>.
+      </p>
+      <p class="mt-3 text-xl">
+        Questo dispositivo è in grado di operare tra gli <strong>1.8</strong> e
+        <strong>5.5</strong> volts.
       </p>
     </div>
   </div>
@@ -46,6 +49,18 @@ utils.onLoad(() => {
         src="/showcase/programmabile.png"
         style="width: 100%; height: auto"
       />
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 w-full">
+    <div class="w-full justify-center align-middle">
+      <img src="/showcase/power.png" style="width: 80%; height: auto" />
+    </div>
+    <div class="m-10">
+      <h2 class="font-bold text-3xl w-full text-left">Alimentazione</h2>
+      <p class="mt-5 text-xl">
+        Arduino uno, dopo averne terminata la programmazione, può essere
+        collegato alla rete elettrica senza bisogno di un pc.
+      </p>
     </div>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 w-full">
