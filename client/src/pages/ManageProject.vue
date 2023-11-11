@@ -474,7 +474,6 @@ function changeProse() {
                 />
               </div>
             </div>
-            changeProse
           </div>
 
           <div class="flex">
