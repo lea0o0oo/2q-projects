@@ -19,7 +19,7 @@ const goto = (url) => {
 
 <template>
   <!-- Hero -->
-  <div class="relative overflow-hidden">
+  <div class="relative overflow-hidden h-full">
     <!-- Gradients -->
     <div
       aria-hidden="true"

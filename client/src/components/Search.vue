@@ -63,7 +63,8 @@ function prevPage() {
     placeholder="Cerca..."
     id="input-search"
   />
-  <div class="" id="search-results" style="margin-top: 30px">
+  <div class="divider"></div>
+  <div id="search-results" class="search-results">
     <div class="flex w-full justify-center">
       <span class="loading loading-bars loading-lg"></span>
     </div>
@@ -136,3 +137,18 @@ function prevPage() {
     </button>
   </div>
 </template>
+
+<style scoped>
+@media (min-height: 570px) {
+  #search-results {
+    height: 570px;
+  }
+}
+
+@media (max-height: 570px) {
+  #search-results {
+    height: 300px;
+    overflow-y: auto;
+  }
+}
+</style>
