@@ -30,6 +30,10 @@ const fixedHeightEditor = EditorView.theme({
 
 let editor;
 
+function $(id) {
+  return document.getElementById(id);
+}
+
 let state = {
   extensions: [
     basicSetup,
@@ -60,8 +64,8 @@ const Toast = Swal.mixin({
   timer: 3000,
   timerProgressBar: true,
   didOpen: (toast) => {
-    toast.addEventListener("mouseenter", Swal.stopTimer);
-    toast.addEventListener("mouseleave", Swal.resumeTimer);
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
   },
 });
 
@@ -119,6 +123,8 @@ utils.onLoad(() => {
 
         document.getElementById("image-fullscreen").src =
           document.getElementById("project-image").src;
+        $("prose-checkbox").checked = projectData.content.prose || false;
+        changeProse();
         state.doc = projectData.content.customHTML;
         state = EditorState.create(state);
         editor = new EditorView({
@@ -253,6 +259,7 @@ async function save() {
       iframe: utils.getById("project-iframe").value,
       customHTML: editor.state.doc.toString(),
       csv: globalCsvData,
+      prose: $("prose-checkbox").checked,
     },
   };
 
@@ -416,6 +423,16 @@ function delProject() {
     }
   });
 }
+
+function changeProse() {
+  if ($("prose-checkbox").checked) {
+    $("previewDIV").classList.add("prose");
+    $("previewDIV").classList.add("lg:prose-xl");
+  } else {
+    $("previewDIV").classList.remove("prose");
+    $("previewDIV").classList.remove("lg:prose-xl");
+  }
+}
 </script>
 
 <template>
@@ -457,6 +474,7 @@ function delProject() {
                 />
               </div>
             </div>
+            changeProse
           </div>
 
           <div class="flex">
@@ -554,7 +572,23 @@ function delProject() {
           <div class="divider"></div>
           <h4>HTML Custom</h4>
           <div id="editorDIV" class="w-full" style="height: 500px"></div>
-          <div id="previewDIV" class="prose lg:prose-xl"></div>
+          <div class="w-full">
+            <div class="flex">
+              <label class="label cursor-pointer">
+                <input
+                  @change="changeProse()"
+                  type="checkbox"
+                  checked="checked"
+                  class="checkbox checkbox-primary"
+                  id="prose-checkbox"
+                />
+                <span class="label-text ml-4">Prose</span>
+              </label>
+            </div>
+            <div class="divider"></div>
+            <div id="previewDIV" class="w-full"></div>
+          </div>
+
           <textarea
             class="textarea textarea-secondary w-full h-full hidden"
             style="min-height: 300px"
@@ -594,4 +628,6 @@ function delProject() {
       </div>
     </div>
   </div>
+
+  <div class="prose lg:prose-xl w-full mt-5 hidden"></div>
 </template>

@@ -9,6 +9,7 @@
     "projectLink": "Eventuali link del progetto",
     "image": "Immagine progetto codificata in Base64",
     "iframe": "Eventuali iframe",
+    "prose": true,
     "customHTML": "Eventuale html custom",
     "csv": "Tabella CSV"
   }

@@ -109,6 +109,10 @@ utils.onLoad(() => {
       }
       utils.getById("project-iframe").src = projectData.content.iframe;
       utils.getById("htmlDIV").innerHTML = projectData.content.customHTML;
+      if ((projectData.content.prose || false) == true) {
+        utils.getById("htmlDIV").classList.add("prose");
+        utils.getById("htmlDIV").classList.add("lg:prose-xl");
+      }
 
       utils.getById("loadingDIV").classList.remove("flex");
       utils.getById("loadingDIV").classList.add("hidden");
@@ -167,7 +171,7 @@ function modifyProject() {
     </div>
     <div
       class="grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4 hidden h-full"
-      style="width: 99.5%"
+      style="width: 100%"
       id="mainDIV"
     >
       <div style="display: flex; justify-content: center">
@@ -248,7 +252,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         <div
           class="dark:bg-neutral bg-zinc-200 w-full rounded-lg h-full div-no-fll flex align-middle"
         >
-          <div>
+          <div class="w-full">
             <div class="grid md:grid-cols-1 grid-cols-1 lg:grid-cols-2 gap-3">
               <div class="flex w-full justify-center" id="img-div">
                 <img
@@ -276,7 +280,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 class="w-full h-full rounded-xl"
               />
             </div>
-            <div id="htmlDIV" class="w-full prose lg:prose-xl"></div>
+            <div id="htmlDIV" class="w-full mt-5"></div>
           </div>
         </div>
       </div>

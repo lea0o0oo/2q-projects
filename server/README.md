@@ -88,6 +88,7 @@ Ottieni i dati di un progetto
       "projectLink": "",
       "image": "",
       "iframe": "https://create.arduino.cc/editor/lea0o0oo/be00678a-2cdd-4e97-87f5-049abc43127f/preview?embed",
+      "prose": true,
       "customHTML": "",
       "csv": "Nome,Quantità,Componente\n\"U1\",1,\" Arduino Uno R3\"\n\"D1\",1,\"Arancione LED\"\n\"R1\",1,\"220 Ω Resistenza\"\n\"Meter1\",1,\"Tensione Multimetro\"\n\"Rpot2\",1,\"0 kΩ Potenziometro\"\n"
     }
@@ -192,6 +193,7 @@ projectData deve essere strutturato nel seguente modo:
     "projectLink": "Eventuali link del progetto",
     "image": "Immagine progetto codificata in Base64",
     "iframe": "Eventuali iframe",
+    "prose": true,
     "customHTML": "Eventuale html custom",
     "csv": "Tabella CSV (come stringa)"
   }
@@ -240,6 +242,7 @@ projectData deve essere strutturato nel seguente modo:
     "projectLink": "Eventuali link del progetto",
     "image": "Immagine progetto codificata in Base64",
     "iframe": "Eventuali iframe",
+    "prose": true,
     "customHTML": "Eventuale html custom",
     "csv": "Tabella CSV (come stringa)"
   }
