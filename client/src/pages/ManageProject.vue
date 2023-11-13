@@ -138,6 +138,7 @@ utils.onLoad(() => {
         utils.getById("modal_loading").checked = false;
       });
   } else {
+    changeProse();
     state = EditorState.create(state);
     editor = new EditorView({
       state,
