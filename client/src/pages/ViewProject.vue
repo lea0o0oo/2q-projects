@@ -275,9 +275,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             <div class="flex w-full justify-center mt-5">
               <iframe
                 id="project-iframe"
-                style="width: 100%; height: 500px"
+                style="width: 100%; height: 60vh !important"
                 src=""
-                class="w-full h-full rounded-xl"
+                class="rounded-xl"
               />
             </div>
             <div id="htmlDIV" class="w-full"></div>

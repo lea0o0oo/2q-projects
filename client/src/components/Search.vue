@@ -8,6 +8,10 @@ let currentPage = 1;
 let maxPages = 1;
 let currentQuery = "";
 
+function $(id) {
+  return document.getElementById(id);
+}
+
 function startSearch(query, page) {
   utils.getById("search-results").innerHTML =
     '<div class="flex w-full justify-center"><span class="loading loading-bars loading-lg"></span></div>';
@@ -33,6 +37,9 @@ utils.onLoad(() => {
   utils.getById("search-focues").addEventListener("change", () => {
     startSearch("", 1);
     utils.getById("input-search").value = "";
+    setTimeout(() => {
+      utils.getById("input-search").focus();
+    }, 200);
   });
   utils.getById("input-search").addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
@@ -139,15 +146,15 @@ function prevPage() {
 </template>
 
 <style scoped>
-@media (min-height: 570px) {
+@media (min-height: 828px) {
   #search-results {
     height: 570px;
   }
 }
 
-@media (max-height: 570px) {
+@media (max-height: 828px) {
   #search-results {
-    height: 300px;
+    height: 50vh;
     overflow-y: auto;
   }
 }
