@@ -3,39 +3,60 @@ import utils from "../helpers/utils";
 import cardTemplate from "../pages/cardTemplate";
 import axios from "axios";
 import config from "../../config";
+import Swal from "sweetalert2";
 
 let currentPage = 1;
 let maxPages = 1;
 let currentQuery = "";
+let isSearching = false;
 
 function $(id) {
   return document.getElementById(id);
 }
 
-function startSearch(query, page) {
-  utils.getById("search-results").innerHTML =
-    '<div class="flex w-full justify-center"><span class="loading loading-bars loading-lg"></span></div>';
-  axios
-    .get(`${config.api.baseURL}/getProjects/?page=${page}&limit=6&q=${query}`)
-    .then((response) => {
-      utils.getById("search-results").innerHTML = "";
-      maxPages = response.data.result.totalPages;
-      utils.getById(
-        "pagination-info-search"
-      ).innerText = `${response.data.result.page} / ${response.data.result.totalPages}`;
-      response.data.result.docs.forEach((doc) => {
-        utils.getById("search-results").innerHTML += cardTemplate(
-          doc.name,
-          utils.readableDate(doc.projectCreated),
-          `/view/${doc._id}`
-        );
+function startSearch(query, page, nodisable) {
+  if (!isSearching) {
+    isSearching = true;
+    if (!nodisable) utils.getById("input-search").disabled = true;
+    if (!nodisable) utils.getById("input-search").blur();
+    console.log("richiesta");
+    utils.getById("search-results").innerHTML =
+      '<div class="flex w-full justify-center"><span class="loading loading-bars loading-lg"></span></div>';
+    axios
+      .get(`${config.api.baseURL}/getProjects/?page=${page}&limit=6&q=${query}`)
+      .then((response) => {
+        utils.getById("search-results").innerHTML = "";
+        maxPages = response.data.result.totalPages;
+        utils.getById(
+          "pagination-info-search"
+        ).innerText = `${response.data.result.page} / ${response.data.result.totalPages}`;
+        response.data.result.docs.forEach((doc) => {
+          utils.getById("search-results").innerHTML += cardTemplate(
+            doc.name,
+            utils.readableDate(doc.projectCreated),
+            `/view/${doc._id}`
+          );
+        });
+        if (response.data.result.docs.length == 0) {
+          utils.getById("search-results").innerHTML =
+            '<h2 class="w-full text-center font-bold text-3xl">Nessun risultato</h2>';
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire("Errore", "Controlla la console per più info", "error");
+      })
+      .finally(() => {
+        isSearching = false;
+        utils.getById("input-search").disabled = false;
+        utils.getById("input-search").focus();
       });
-    });
+  }
 }
 
 utils.onLoad(() => {
   utils.getById("search-focues").addEventListener("change", () => {
-    startSearch("", 1);
+    startSearch("", 1, true);
     utils.getById("input-search").value = "";
     setTimeout(() => {
       utils.getById("input-search").focus();
