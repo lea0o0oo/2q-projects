@@ -1,3 +1,15 @@
+let onMobile;
+
+if (
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  )
+) {
+  onMobile = true;
+} else {
+  onMobile = false;
+}
+
 function readableDate(date) {
   const monthNames = [
     "Gennaio",
@@ -48,4 +60,4 @@ function getById(element) {
   return document.getElementById(element);
 }
 
-export default { readableDate, onLoad, isEmpty, getById };
+export default { readableDate, onLoad, isEmpty, getById, onMobile };

@@ -2,7 +2,7 @@
 import axios from "axios";
 import config from "../../config";
 import checkJWT from "../helpers/checkJWT";
-import cardTemplate from "./cardTemplate";
+import cardTemplate from "./mainDashProjectCardTemplate";
 import utils from "../helpers/utils";
 
 checkJWT();
@@ -56,7 +56,7 @@ function prevPage() {
 
 <template>
   <div style="width: 100%">
-    <h1 class="w-full text-center font-bold text-4xl mt-3">Dashboard</h1>
+    <h1 class="w-full text-center font-bold text-4xl mb-7">Dashboard</h1>
     <div class="flex w-full justify-center">
       <div
         class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"

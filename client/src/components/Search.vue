@@ -19,7 +19,7 @@ function startSearch(query, page, nodisable) {
     isSearching = true;
     if (!nodisable) utils.getById("input-search").disabled = true;
     if (!nodisable) utils.getById("input-search").blur();
-    console.log("richiesta");
+    //console.log("richiesta");
     utils.getById("search-results").innerHTML =
       '<div class="flex w-full justify-center"><span class="loading loading-bars loading-lg"></span></div>';
     axios
@@ -49,7 +49,7 @@ function startSearch(query, page, nodisable) {
       .finally(() => {
         isSearching = false;
         utils.getById("input-search").disabled = false;
-        utils.getById("input-search").focus();
+        if (!utils.onMobile) utils.getById("input-search").focus();
       });
   }
 }
@@ -59,7 +59,7 @@ utils.onLoad(() => {
     startSearch("", 1, true);
     utils.getById("input-search").value = "";
     setTimeout(() => {
-      utils.getById("input-search").focus();
+      if (!utils.onMobile) utils.getById("input-search").focus();
     }, 200);
   });
   utils.getById("input-search").addEventListener("keydown", (event) => {
@@ -91,7 +91,7 @@ function prevPage() {
     placeholder="Cerca..."
     id="input-search"
   />
-  <div class="divider"></div>
+  <div class="divider rounded-full"></div>
   <div id="search-results" class="search-results">
     <div class="flex w-full justify-center">
       <span class="loading loading-bars loading-lg"></span>
