@@ -12,6 +12,11 @@ body {
   justify-content: space-between;
 }
 
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 :root {
   --footer-h: 245px;
   --scrollbarBG: transparent;

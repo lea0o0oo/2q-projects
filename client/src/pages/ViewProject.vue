@@ -276,7 +276,7 @@ function modifyProject() {
       <div style="display: flex; justify-content: center">
         <div
           class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:ml-2 md:ml-0 ml-0 h-full div-no-fll"
-          style="min-height: 80vh"
+          style="min-height: 70vh"
         >
           <div class="ml-2 mr-2 mt-3">
             <div class="ml-2" style="display: flex; align-items: center">
@@ -382,7 +382,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 id="project-iframe"
                 style="
                   width: 100%;
-                  height: 60vh !important;
+                  height: 50vh !important;
                   border-radius: 0.5rem;
                 "
                 src=""
