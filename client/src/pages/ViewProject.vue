@@ -82,7 +82,7 @@ utils.onLoad(() => {
   axios
     .get(`${config.api.baseURL}/project/${route.params.projectId}`)
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       projectData = response.data.result;
 
       if (
@@ -172,7 +172,7 @@ function modifyProject() {
     >
       <div style="display: flex; justify-content: center">
         <div
-          class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:ml-2 md:ml-0 ml-0 h-full div-no-fll"
+          class="dark:bg-neutral bg-zinc-100 w-full rounded-lg lg:ml-2 md:ml-0 ml-0 h-full div-no-fll"
           style="min-height: 80vh"
         >
           <div class="ml-2 mr-2 mt-3">
@@ -201,7 +201,7 @@ function modifyProject() {
         class="lg:col-span-3"
       >
         <div
-          class="dark:bg-neutral bg-zinc-200 w-full rounded-lg h-full div-no-fll flex align-middle"
+          class="dark:bg-neutral bg-zinc-100 w-full rounded-lg h-full div-no-fll flex align-middle"
         >
           <div class="w-full">
             <div class="grid md:grid-cols-1 grid-cols-1 lg:grid-cols-2 gap-3">
