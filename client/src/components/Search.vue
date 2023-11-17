@@ -10,6 +10,13 @@ let maxPages = 1;
 let currentQuery = "";
 let isSearching = false;
 
+let skeletonStuff = `<div class="skeleton mb-2" style="height: 87px"></div>
+<div class="skeleton mb-2" style="height: 87px"></div>
+<div class="skeleton mb-2" style="height: 87px"></div>
+<div class="skeleton mb-2" style="height: 87px"></div>
+<div class="skeleton mb-2" style="height: 87px"></div>
+<div class="skeleton mb-2" style="height: 87px"></div>`;
+
 function $(id) {
   return document.getElementById(id);
 }
@@ -20,8 +27,7 @@ function startSearch(query, page, nodisable) {
     if (!nodisable) utils.getById("input-search").disabled = true;
     if (!nodisable) utils.getById("input-search").blur();
     //console.log("richiesta");
-    utils.getById("search-results").innerHTML =
-      '<div class="flex w-full justify-center"><span class="loading loading-bars loading-lg"></span></div>';
+    utils.getById("search-results").innerHTML = skeletonStuff;
     axios
       .get(`${config.api.baseURL}/getProjects/?page=${page}&limit=6&q=${query}`)
       .then((response) => {
@@ -94,7 +100,12 @@ function prevPage() {
   <div class="divider rounded-full"></div>
   <div id="search-results" class="search-results">
     <div class="flex w-full justify-center">
-      <span class="loading loading-bars loading-lg"></span>
+      <div class="skeleton mb-2" style="height: 87px"></div>
+      <div class="skeleton mb-2" style="height: 87px"></div>
+      <div class="skeleton mb-2" style="height: 87px"></div>
+      <div class="skeleton mb-2" style="height: 87px"></div>
+      <div class="skeleton mb-2" style="height: 87px"></div>
+      <div class="skeleton mb-2" style="height: 87px"></div>
     </div>
   </div>
   <!-- ... -->

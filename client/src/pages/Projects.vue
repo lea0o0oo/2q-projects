@@ -7,9 +7,21 @@ import cardTemplate from "./mainDashProjectCardTemplate";
 let currentPage = 1;
 let maxPages = 1;
 
+let skeletonStuff = `<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>
+<div class="skeleton" style="height: 87px"></div>`;
+
 function loadProjects(page) {
-  utils.getById("projectsContainer").innerHTML =
-    '<div class="lg:col-span-4 md:col-span-3 flex justify-center"><span class="loading loading-bars loading-lg"></span></div>';
+  utils.getById("projectsContainer").innerHTML = skeletonStuff;
   axios
     .get(`${config.api.baseURL}/getProjects/?page=${page}`)
     .then((response) => {
@@ -79,42 +91,32 @@ function prevPage() {
 
     <div>
       <!-- Card Section -->
-      <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <div
+        class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto projCPrev"
+      >
         <!-- Grid -->
         <div
           class="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
           id="projectsContainer"
         >
-          <div class="lg:col-span-4 md:col-span-3 flex justify-center">
-            <span class="loading loading-bars loading-lg"></span>
-          </div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
+          <div class="skeleton" style="height: 87px"></div>
         </div>
         <!-- End Grid -->
       </div>
       <!-- End Card Section -->
     </div>
     <div class="flex w-ful justify-center">
-      <!--
-  This component uses @tailwindcss/forms
-
-  yarn add @tailwindcss/forms
-  npm install @tailwindcss/forms
-
-  plugins: [require('@tailwindcss/forms')]
-
-  @layer components {
-    .no-spinner {
-      -moz-appearance: textfield;
-    }
-
-    .no-spinner::-webkit-outer-spin-button,
-    .no-spinner::-webkit-inner-spin-button {
-      margin: 0;
-      -webkit-appearance: none;
-    }
-  }
--->
-
       <div class="flex align-middle justify-center">
         <button class="btn btn-circle mb-3" @click="prevPage()">
           <svg
@@ -184,3 +186,20 @@ function prevPage() {
     </div>
   </div>
 </template>
+
+<style scoped>
+@media (min-width: 1292px) {
+  .projCPrev {
+    height: 400px;
+  }
+}
+
+@media (max-width: 1292px) {
+  .projCPrev {
+    height: 100%;
+  }
+}
+/* .projCPrev {
+  height: 400px;
+} */
+</style>

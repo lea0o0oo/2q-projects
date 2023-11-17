@@ -5,7 +5,7 @@
  */
 export default (name, date, link) => {
   return `<div class="mb-2"><a
-  class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-gray-900 dark:border-gray-800"
+  class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-zinc-900 dark:border-gray-800"
   href="${link}"
   >
   <div class="p-4 md:p-5">

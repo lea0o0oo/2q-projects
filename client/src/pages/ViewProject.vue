@@ -158,17 +158,116 @@ function modifyProject() {
 </script>
 
 <template>
+  <div class="hidden">
+    <p class="mt-4 hidden" id="lbl-stay">
+      Potrebbe richiedere un po' di tempo...
+    </p>
+  </div>
+
   <div class="w-full mb-10">
-    <div id="loadingDIV" class="flex w-full justify-center" style="">
-      <div>
-        <div class="flex w-full justify-center">
-          <span class="loading loading-bars loading-lg"></span>
+    <div
+      id="loadingDIV"
+      class="grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4 grid h-full"
+      style="width: 100%"
+    >
+      <div style="display: flex; justify-content: center">
+        <div
+          class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:ml-2 md:ml-0 ml-0 h-full div-no-fll"
+          style="min-height: 80vh"
+        >
+          <div class="ml-2 mr-2 mt-3">
+            <div class="ml-2" style="display: flex; align-items: center">
+              <div class="skeleton w-16 h-16 shrink-0 mask mask-squircle"></div>
+              <div class="skeleton h-6 w-80 ml-3"></div>
+            </div>
+            <div class="divider"></div>
+            <div class="skeleton h-5 w-28 mb-4"></div>
+            <div class="skeleton h-4 w-full mb-2"></div>
+            <div class="skeleton h-4 w-full mb-2"></div>
+            <div class="skeleton h-4 w-full mb-2"></div>
+            <div class="skeleton h-4 w-full mb-2"></div>
+
+            <div class="skeleton h-5 w-28 mb-4 mt-10"></div>
+            <div class="skeleton h-4 w-full mb-2"></div>
+
+            <div class="skeleton h-5 w-28 mb-4 mt-10"></div>
+            <div class="skeleton h-4 w-full mb-2"></div>
+          </div>
         </div>
-        <p class="mt-4 hidden" id="lbl-stay">
-          Potrebbe richiedere un po' di tempo...
-        </p>
+      </div>
+
+      <div
+        style="display: flex; justify-content: center; width: 100%"
+        class="lg:col-span-3"
+      >
+        <div
+          class="dark:bg-neutral bg-zinc-200 w-full rounded-lg h-full div-no-fll flex align-middle"
+        >
+          <div class="w-full">
+            <div class="grid md:grid-cols-1 grid-cols-1 lg:grid-cols-2 gap-3">
+              <div class="flex w-full justify-center">
+                <div
+                  class="skeleton w-full rounded-lg"
+                  style="height: 350px; border-radius: 0.5rem"
+                ></div>
+              </div>
+
+              <div
+                class="overflow-x-auto h-full rouned-xl mt-4 md:mt-4 lg:mt-0"
+                style="max-height: 400px"
+              >
+                <div class="overflow-x-auto">
+                  <table class="table">
+                    <!-- head -->
+                    <thead>
+                      <tr>
+                        <th><div class="skeleton h-4 w-full mb-2"></div></th>
+                        <th><div class="skeleton h-4 w-full mb-2"></div></th>
+                        <th><div class="skeleton h-4 w-full mb-2"></div></th>
+                        <th><div class="skeleton h-4 w-full mb-2"></div></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- row 1 -->
+                      <tr>
+                        <th><div class="skeleton h-4 w-full mb-2"></div></th>
+                        <td><div class="skeleton h-4 w-full mb-2"></div></td>
+                        <td><div class="skeleton h-4 w-full mb-2"></div></td>
+                        <td><div class="skeleton h-4 w-full mb-2"></div></td>
+                      </tr>
+                      <!-- row 2 -->
+                      <tr>
+                        <th><div class="skeleton h-4 w-full mb-2"></div></th>
+                        <td><div class="skeleton h-4 w-full mb-2"></div></td>
+                        <td><div class="skeleton h-4 w-full mb-2"></div></td>
+                        <td><div class="skeleton h-4 w-full mb-2"></div></td>
+                      </tr>
+                      <!-- row 3 -->
+                      <tr>
+                        <th><div class="skeleton h-4 w-full mb-2"></div></th>
+                        <td><div class="skeleton h-4 w-full mb-2"></div></td>
+                        <td><div class="skeleton h-4 w-full mb-2"></div></td>
+                        <td><div class="skeleton h-4 w-full mb-2"></div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="flex w-full justify-center mt-5">
+              <div
+                class="skeleton w-full"
+                style="height: 400px; border-radius: 0.5rem"
+              ></div>
+            </div>
+            <div class="w-full"></div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- ... -->
+
     <div
       class="grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-4 hidden h-full"
       style="width: 100%"
@@ -258,8 +357,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
               <div class="flex w-full justify-center" id="img-div">
                 <img
                   src="https://i1.wp.com/potafiori.com/wp-content/uploads/2020/04/placeholder.png"
-                  style="width: 100%; height: auto; object-fit: cover"
-                  class="rounded-xl cursor-pointer"
+                  style="
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    border-radius: 0.5rem;
+                  "
+                  class="cursor-pointer"
                   id="project-image"
                   onclick="modal_see_img.showModal()"
                 />
@@ -276,9 +380,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             <div class="flex w-full justify-center mt-5">
               <iframe
                 id="project-iframe"
-                style="width: 100%; height: 60vh !important"
+                style="
+                  width: 100%;
+                  height: 60vh !important;
+                  border-radius: 0.5rem;
+                "
                 src=""
-                class="rounded-xl"
               />
             </div>
             <div id="htmlDIV" class="w-full"></div>
