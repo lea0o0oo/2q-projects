@@ -133,6 +133,7 @@ utils.onLoad(() => {
         });
         utils.getById("previewDIV").innerHTML = editor.state.doc.toString();
         utils.getById("project-iframe").value = projectData.content.iframe;
+        updateIframePreview();
         loadCSVFile(projectData.content.csv, "tableCSV", true);
 
         utils.getById("modal_loading").checked = false;
@@ -382,6 +383,7 @@ utils.onLoad(() => {
   var fileInput = document.getElementById("project-csv-picker");
   fileInput.addEventListener("change", function (e) {
     var file = e.target.files[0];
+    document.getElementById("table-thing").innerHTML = "";
     loadCSVFile(file, "tableCSV");
   });
 });
@@ -433,6 +435,22 @@ function changeProse() {
     $("previewDIV").classList.remove("prose");
     $("previewDIV").classList.remove("lg:prose-xl");
   }
+}
+
+function defaultProjImage() {
+  document.getElementById("project-image").src =
+    "https://i1.wp.com/potafiori.com/wp-content/uploads/2020/04/placeholder.png";
+  document.getElementById("image-fullscreen").src =
+    document.getElementById("project-image").src;
+}
+
+function updateIframePreview() {
+  if (utils.isEmpty($("project-iframe").value)) {
+    $("iframe-preview").classList.add("hidden");
+  } else {
+    $("iframe-preview").classList.remove("hidden");
+  }
+  $("iframe-preview").src = $("project-iframe").value;
 }
 </script>
 
@@ -510,12 +528,29 @@ function changeProse() {
             </div>
             <div>
               <p class="font-bold text-xl mb-2">Immagini</p>
-              <input
-                type="file"
-                class="file-input file-input-bordered w-full mb-3 input-secondary"
-                accept=".png .jpg .gif .apng .jpeg .webp"
-                id="project-image-picker"
-              />
+              <div style="display: flex">
+                <input
+                  type="file"
+                  class="file-input file-input-bordered w-full mb-3 input-secondary"
+                  accept=".png .jpg .gif .apng .jpeg .webp"
+                  id="project-image-picker"
+                />
+                <button class="btn ml-2" @click="defaultProjImage()">
+                  <svg
+                    fill="currentColor"
+                    width="30px"
+                    height="30px"
+                    viewBox="-3.5 0 19 19"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="cf-icon-svg"
+                  >
+                    <path
+                      d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"
+                    />
+                  </svg>
+                </button>
+              </div>
+
               <img
                 src="https://i1.wp.com/potafiori.com/wp-content/uploads/2020/04/placeholder.png"
                 style="width: 100%; height: auto"
@@ -527,11 +562,16 @@ function changeProse() {
             <div>
               <p class="font-bold text-xl mb-2">Iframe</p>
               <input
+                @change="updateIframePreview()"
                 type="text"
                 placeholder="https://"
                 class="input input-bordered w-full input-success"
                 id="project-iframe"
               />
+              <iframe
+                class="w-full h-full mt-2 rounded-xl hidden"
+                id="iframe-preview"
+              ></iframe>
             </div>
             <div>
               <p class="font-bold text-xl mb-2">Tabella CSV</p>
