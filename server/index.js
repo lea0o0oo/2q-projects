@@ -25,7 +25,6 @@ app.get("/", (req, res) => {
 
 const connectionOptions = {
   dbName: config.database.databaseName,
-  useUnifiedTopology: true,
 };
 
 process.on("uncaughtException", (err, origin) => {
