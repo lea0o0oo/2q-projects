@@ -24,8 +24,8 @@ utils.onLoad(() => {
         dei modelli più popolari della famiglia Arduino.
       </p>
       <p class="mt-3 text-xl">
-        La ram è integrata all'interno del microcontrollore ed è di
-        <strong>32KB</strong>.
+        Ha una SRAM di
+        <strong>2KB</strong> e una EEPROM di <strong>1KB</strong>.
       </p>
       <p class="mt-3 text-xl">
         Questo dispositivo è in grado di operare tra gli <strong>1.8</strong> e
@@ -80,7 +80,7 @@ utils.onLoad(() => {
   </div>
   <h3 class="text-5xl w-full font-bold text-center">Modello 3D</h3>
   <div class="flex w-full justify-center">
-    <div style="height: 800px; width: 900px" class="rounded-xl">
+    <div style="height: 400px; width: 900px" class="rounded-xl">
       <canvas
         id="canvas3d"
         width="740"
