@@ -290,6 +290,10 @@ function modifyProject() {
                 [NOME]
               </h3>
             </div>
+            <div class="badge badge-primary mt-5 hidden" style="display: none">
+              BADGE
+            </div>
+
             <div class="divider"></div>
 
             <h2 class="font-bold text-2xl mt-5">Descrizione</h2>

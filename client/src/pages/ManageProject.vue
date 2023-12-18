@@ -383,7 +383,7 @@ utils.onLoad(() => {
   var fileInput = document.getElementById("project-csv-picker");
   fileInput.addEventListener("change", function (e) {
     var file = e.target.files[0];
-    document.getElementById("table-thing").innerHTML = "";
+    document.getElementById("tableCSV").innerHTML = "";
     loadCSVFile(file, "tableCSV");
   });
 });
