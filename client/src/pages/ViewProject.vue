@@ -236,11 +236,38 @@ function copyCode() {
 }
 
 function downloadCode() {
-  let filename = projectData.metadata.name;
-  filename = filename.replace(" ", "_");
-  filename = filename.replace(".", "_");
-  filename = filename + ".ino";
-  downloadFile(projectData.content.code.code, filename);
+  try {
+    let filename = projectData.metadata.name;
+    filename = filename.replace(" ", "_");
+    filename = filename.replace(".", "_");
+    filename = filename + ".ino";
+    downloadFile(projectData.content.code.code, filename);
+    // Avviso
+    let timerInterval;
+    Swal.fire({
+      title: "Download avviato",
+      icon: "success",
+      timer: 2000,
+      showConfirmButton: false,
+      timerProgressBar: true,
+      didOpen: () => {
+        const timer = Swal.getPopup().querySelector("b");
+        timerInterval = setInterval(() => {
+          timer.textContent = `${Swal.getTimerLeft()}`;
+        }, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    });
+  } catch (err) {
+    Swal.fire({
+      title: "Errore",
+      text: "Errore durante il download, controlla la console per più info.",
+      icon: "error",
+    });
+    console.error(err);
+  }
 }
 </script>
 
