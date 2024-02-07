@@ -1,11 +1,27 @@
-# API
+# Contenuti
+
+- [Introduzione](#introduzione)
+- [Setup localce](#setup-locale)
+- [Variabili d'ambiente](#env)
+- [Endpoints pubblici](#endpoints-pubblici)
+  - [Recupera tutti i progetti](#recupera-tutti-i-progetti)
+  - [Recupera un progetto](#recupera-un-progetto)
+- [Endpoints per admin](#endpoints-per-admin)
+  - [Crea un account](#crea-un-account)
+  - [Login](#login)
+  - [Controlla l'accesso](#controlla-laccesso)
+  - [Crea un progetto](#crea-un-progetto)
+  - [Aggiorna un progetto](#aggiorna-un-progetto)
+  - [Elimina un progetto](#elimina-un-progetto)
+
+# Introduzione
 
 Questa api viene utilizzata per recuperare i progetti dal database
 
-La versione pubblica di essa è disponibile all'indirizzo <br />
+Puoi ottenere dati sui nostri progetti utilizzando la versione pubblica nella nostra API all'indirizzo <br />
 [https://2q-projects-backend.vercel.app](https://2q-projects-backend.vercel.app)
 
-## Setup
+## Setup locale
 
 La api utilizza come database mongodb.<br />
 Puoi usare il tuo database con una stringa di connessione che puoi applicare al file 'config.js' (database > connectionString)
@@ -88,6 +104,10 @@ Ottieni i dati di un progetto
       "projectLink": "",
       "image": "",
       "iframe": "https://create.arduino.cc/editor/lea0o0oo/be00678a-2cdd-4e97-87f5-049abc43127f/preview?embed",
+      "code": {
+        "lang": "cpp",
+        "code": "// Codice arduino"
+      },
       "prose": true,
       "customHTML": "",
       "csv": "Nome,Quantità,Componente\n\"U1\",1,\" Arduino Uno R3\"\n\"D1\",1,\"Arancione LED\"\n\"R1\",1,\"220 Ω Resistenza\"\n\"Meter1\",1,\"Tensione Multimetro\"\n\"Rpot2\",1,\"0 kΩ Potenziometro\"\n"
@@ -193,6 +213,10 @@ projectData deve essere strutturato nel seguente modo:
     "projectLink": "Eventuali link del progetto",
     "image": "Immagine progetto codificata in Base64",
     "iframe": "Eventuali iframe",
+    "code": {
+      "lang": "cpp",
+      "code": "// Codice arduino"
+    },
     "prose": true,
     "customHTML": "Eventuale html custom",
     "csv": "Tabella CSV (come stringa)"
@@ -242,6 +266,10 @@ projectData deve essere strutturato nel seguente modo:
     "projectLink": "Eventuali link del progetto",
     "image": "Immagine progetto codificata in Base64",
     "iframe": "Eventuali iframe",
+    "code": {
+      "lang": "cpp",
+      "code": "// Codice arduino"
+    },
     "prose": true,
     "customHTML": "Eventuale html custom",
     "csv": "Tabella CSV (come stringa)"

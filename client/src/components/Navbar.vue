@@ -97,6 +97,7 @@ function gotoURL(url) {
         <button
           class="btn btn-ghost btn-circle"
           @click="showSearch()"
+          id="projectSearch"
           data-hs-overlay="#modal-search"
           title="Cerca progetti"
         >

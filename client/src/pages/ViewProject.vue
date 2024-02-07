@@ -517,8 +517,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
                 <pre
                   class="rounded-xl arduino-code dark:border-zinc-500 border-zinc-700 border-2"
-                  style="width: 100%; height: 60vh; overflow-y: auto"
-                ><code style="width: 100%; height: calc(50vh - 1101.75px); overflow-y: auto;" class="language-arduino rounded-xl" id="actual-code">/* Your Arduino code goes here */</code></pre>
+                  style="width: 100%; height: 56vh; overflow-y: auto"
+                ><code style="width: 100%; height: 100%; overflow-y: auto;" class="language-arduino rounded-xl" id="actual-code">/* Your Arduino code goes here */</code></pre>
               </div>
             </div>
             <div id="htmlDIV" class="w-full"></div>
