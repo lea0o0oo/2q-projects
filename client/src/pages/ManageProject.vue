@@ -152,7 +152,8 @@ utils.onLoad(() => {
 
         datePicker.value = formattedDate;
 
-        $("arduinoCode").value = projectData.content.code.code;
+        if (projectData.content.code.code)
+          $("arduinoCode").value = projectData.content.code.code;
         utils.getById("project-name").value = projectData.metadata.name;
         utils.getById("project-desc").value = projectData.metadata.description;
         document.getElementById("project-icon").src = projectData.metadata.icon
@@ -625,7 +626,7 @@ function updateIframePreview() {
                 onclick="modal_see_img.showModal()"
               />
             </div>
-            <div>
+            <div style="height: 500px">
               <p class="font-bold text-xl mb-2">Iframe</p>
               <input
                 @change="updateIframePreview()"
@@ -637,6 +638,7 @@ function updateIframePreview() {
               <iframe
                 class="w-full h-full mt-2 rounded-xl hidden"
                 id="iframe-preview"
+                style="height: 80%"
               ></iframe>
             </div>
             <div>
