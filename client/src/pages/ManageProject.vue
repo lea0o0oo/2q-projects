@@ -14,6 +14,7 @@ import { indentWithTab } from "@codemirror/commands";
 import { basicSetup, EditorView } from "codemirror";
 import { EditorState, Compartment } from "@codemirror/state";
 import { html } from "@codemirror/lang-html";
+import { cpp } from "@codemirror/lang-cpp";
 import {
   oneDarkTheme,
   oneDarkHighlightStyle,
@@ -22,6 +23,7 @@ import {
 let language = new Compartment(),
   tabSize = new Compartment();
 
+// HTML EDITOR
 const fixedHeightEditor = EditorView.theme({
   ".cm-content, .cm-gutter": { minHeight: "500px" },
   "&": { maxHeight: "500px" },
@@ -29,9 +31,44 @@ const fixedHeightEditor = EditorView.theme({
 });
 
 let editor;
+let cppEditor;
 
 function $(id) {
   return document.getElementById(id);
+}
+
+function fetchStateObj(lang) {
+  if (lang == "cpp") {
+    // spent like 2 hours on this now it is totally useless xD xD xD
+    return {
+      extensions: [
+        basicSetup,
+        oneDarkTheme,
+        syntaxHighlighting(oneDarkHighlightStyle),
+        keymap.of([indentWithTab]),
+        cppHeight,
+        language.of(cpp()),
+        tabSize.of(EditorState.tabSize.of(8)),
+      ],
+    };
+  } else {
+    return {
+      extensions: [
+        basicSetup,
+        oneDarkTheme,
+        syntaxHighlighting(oneDarkHighlightStyle),
+        keymap.of([indentWithTab]),
+        fixedHeightEditor,
+        language.of(html()),
+        tabSize.of(EditorState.tabSize.of(8)),
+        EditorView.updateListener.of((v) => {
+          if (v.docChanged) {
+            updateHTML();
+          }
+        }),
+      ],
+    };
+  }
 }
 
 let state = {
@@ -81,6 +118,10 @@ let projectStructure = {
     projectLink: "",
     image: "",
     iframe: "",
+    code: {
+      lang: "cpp",
+      code: "",
+    },
     customHTML: "",
   },
 };
@@ -111,6 +152,7 @@ utils.onLoad(() => {
 
         datePicker.value = formattedDate;
 
+        $("arduinoCode").value = projectData.content.code.code;
         utils.getById("project-name").value = projectData.metadata.name;
         utils.getById("project-desc").value = projectData.metadata.description;
         document.getElementById("project-icon").src = projectData.metadata.icon
@@ -131,6 +173,7 @@ utils.onLoad(() => {
           state,
           parent: utils.getById("editorDIV"),
         });
+
         utils.getById("previewDIV").innerHTML = editor.state.doc.toString();
         utils.getById("project-iframe").value = projectData.content.iframe;
         updateIframePreview();
@@ -140,11 +183,30 @@ utils.onLoad(() => {
       });
   } else {
     changeProse();
-    state = EditorState.create(state);
+
+    let state = EditorState.create(fetchStateObj());
     editor = new EditorView({
       state,
       parent: utils.getById("editorDIV"),
     });
+
+    // let cppEditorState = EditorState.create(fetchStateObj("cpp"));
+    // new EditorView({
+    //   cppEditorState,
+    //   parent: utils.getById("cppCode"),
+    // });
+
+    // let cppEditor = new EditorView({
+    //   state: EditorState.create(fetchStateObj("cpp")),
+    //   parent: utils.getById("cppCode"), // Replace with your container ID
+    // });
+
+    // cppEditorState = EditorState.create(cppEditorState);
+    // cppEditor = new EditorView({
+    //   cppEditorState,
+    //   parent: utils.getById("cppCode"),
+    // });
+    console.log("here");
   }
 });
 
@@ -259,6 +321,10 @@ async function save() {
       projectLink: utils.getById("project-link").value,
       image: imageData,
       iframe: utils.getById("project-iframe").value,
+      code: {
+        lang: "cpp",
+        code: $("arduinoCode").value,
+      },
       customHTML: editor.state.doc.toString(),
       csv: globalCsvData,
       prose: $("prose-checkbox").checked,
@@ -586,6 +652,14 @@ function updateIframePreview() {
                   <!-- head -->
                 </table>
               </div>
+            </div>
+            <div class="w-full lg:col-span-2 md:col-span-1">
+              <textarea
+                id="arduinoCode"
+                class="textarea textarea-primary w-full"
+                style="height: 100px"
+                placeholder="// Codice arduino qui"
+              ></textarea>
             </div>
             <div>
               <p class="font-bold text-xl mb-2">Salva</p>

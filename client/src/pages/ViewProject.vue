@@ -5,6 +5,53 @@ import utils from "../helpers/utils";
 import { useRoute } from "vue-router";
 import Swal from "sweetalert2";
 import Papa from "papaparse";
+import hljs from "highlight.js";
+import arduino from "highlight.js/lib/languages/arduino";
+
+hljs.registerLanguage("arduino", arduino);
+
+function $(id) {
+  return document.getElementById(id);
+}
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  },
+});
+
+function downloadFile(content, fileName, mimeType) {
+  if (!mimeType) mimeType = "text/plain";
+  // Create a blob object from the content
+  var blob = new Blob([content], { type: mimeType });
+
+  // Create a temporary URL for the blob
+  var url = URL.createObjectURL(blob);
+
+  // Create an anchor element
+  var a = document.createElement("a");
+
+  // Set the href and download attributes for the anchor element
+  a.href = url;
+  a.download = fileName;
+
+  // Append the anchor element to the body (not strictly necessary but generally done)
+  document.body.appendChild(a);
+
+  // Trigger a click on the anchor element to start the download
+  a.click();
+
+  // Remove the anchor element from the body
+  document.body.removeChild(a);
+
+  // Revoke the temporary URL
+  URL.revokeObjectURL(url);
+}
 
 function loadCSVFile(file, tableId, asText) {
   var reader = new FileReader();
@@ -121,6 +168,22 @@ utils.onLoad(() => {
 
       loadCSVFile(projectData.content.csv, "table-thing", true);
 
+      try {
+        $("actual-code").innerHTML = hljs.highlight(
+          projectData.content.code.code,
+          { language: "cpp" }
+        ).value;
+      } catch (e) {}
+
+      // $("project-code").innerHTML = hljs.highlightAuto(
+      //   projectData.content.code.code
+      // ).value;
+
+      if (
+        utils.isEmpty(projectData.content.code.code) ||
+        projectData.content.code.code == null
+      )
+        $("project-code").classList.add("hidden");
       if (utils.isEmpty(projectData.content.iframe)) {
         utils.getById("project-iframe").classList.add("hidden");
       }
@@ -154,6 +217,30 @@ function openProjectLink() {
 
 function modifyProject() {
   window.location.href = `/manage/${route.params.projectId}`;
+}
+
+function copyCode() {
+  try {
+    navigator.clipboard.writeText(projectData.content.code.code);
+    Toast.fire({
+      icon: "success",
+      title: "Codice copiato",
+    });
+  } catch (e) {
+    Toast.fire({
+      icon: "error",
+      title: "Errore",
+    });
+    console.error(e);
+  }
+}
+
+function downloadCode() {
+  let filename = projectData.metadata.name;
+  filename = filename.replace(" ", "_");
+  filename = filename.replace(".", "_");
+  filename = filename + ".ino";
+  downloadFile(projectData.content.code.code, filename);
 }
 </script>
 
@@ -387,6 +474,25 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 style="width: 100%; height: 60vh; border-radius: 0.5rem"
                 src=""
               />
+              <div
+                id="project-code"
+                class="dark:bg-zinc-700 bg-zinc-400"
+                style="width: 100%; height: 60vh; border-radius: 0.5rem"
+              >
+                <div class="flex mb-2 mt-2">
+                  <button class="btn btn-xs mr-2 ml-1" @click="copyCode()">
+                    Copia
+                  </button>
+                  <button class="btn btn-xs" @click="downloadCode()">
+                    Scarica
+                  </button>
+                </div>
+
+                <pre
+                  class="rounded-xl arduino-code dark:border-zinc-500 border-zinc-700 border-2"
+                  style="width: 100%; height: 60vh; overflow-y: auto"
+                ><code style="width: 100%; height: calc(50vh - 1101.75px); overflow-y: auto;" class="language-arduino rounded-xl" id="actual-code">/* Your Arduino code goes here */</code></pre>
+              </div>
             </div>
             <div id="htmlDIV" class="w-full"></div>
           </div>
@@ -412,6 +518,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </template>
 
 <style scoped>
+@media (prefers-color-scheme: dark) {
+  .arduino-code {
+    background-color: #22272e;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .arduino-code {
+    background-color: white;
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   .div-no-fll {
     width: 95%;

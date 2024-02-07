@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import "./styles.css";
 import "./tailwind.css";
+import "./hljs.css";
 import App from "./App.vue";
 import { router } from "./router";
 
