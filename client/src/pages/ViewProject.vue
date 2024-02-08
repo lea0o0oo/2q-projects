@@ -185,10 +185,16 @@ utils.onLoad(() => {
       if (
         utils.isEmpty(projectData.content.code.code) ||
         projectData.content.code.code == null
-      )
+      ) {
         $("project-code").classList.add("hidden");
+        $("codeContainer").classList.add("hidden");
+        $("iframeContainer").classList.add("singleElem");
+      }
+
       if (utils.isEmpty(projectData.content.iframe)) {
         utils.getById("project-iframe").classList.add("hidden");
+        utils.getById("iframeContainer").classList.add("hidden");
+        $("codeContainer").classList.add("singleElem");
       }
       if (utils.isEmpty(projectData.content.image)) {
         utils.getById("project-image").classList.add("hidden");
@@ -499,29 +505,35 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
               </div>
             </div>
             <div class="flex w-full justify-center mt-5">
-              <iframe
-                id="project-iframe"
-                style="width: 100%; height: 60vh; border-radius: 0.5rem"
-                src=""
-              />
-              <div
-                id="project-code"
-                class="dark:bg-zinc-700 bg-gray-300"
-                style="width: 100%; height: 60vh; border-radius: 0.5rem"
-              >
-                <div class="flex mb-2 mt-2">
-                  <button class="btn btn-xs mr-2 ml-1" @click="copyCode()">
-                    Copia
-                  </button>
-                  <button class="btn btn-xs" @click="downloadCode()">
-                    Scarica
-                  </button>
+              <div class="grid lg:grid-cols-2 grid-cols-1 gap-3 w-full">
+                <div id="iframeContainer" class="w-full">
+                  <iframe
+                    id="project-iframe"
+                    style="width: 100%; height: 60vh; border-radius: 0.5rem"
+                    src=""
+                  />
                 </div>
+                <div id="codeContainer" class="w-full flex">
+                  <div
+                    id="project-code"
+                    class="dark:bg-zinc-700 bg-gray-300"
+                    style="width: 100%; height: 60vh; border-radius: 0.5rem"
+                  >
+                    <div class="flex mb-2 mt-2">
+                      <button class="btn btn-xs mr-2 ml-1" @click="copyCode()">
+                        Copia
+                      </button>
+                      <button class="btn btn-xs" @click="downloadCode()">
+                        Scarica
+                      </button>
+                    </div>
 
-                <pre
-                  class="rounded-xl arduino-code dark:border-zinc-500 border-zinc-700 border-2 line-numbers"
-                  style="width: 100%; height: 56vh; overflow-y: auto"
-                ><code style="width: 100%; height: 100%; overflow-y: auto; " class="language-arduino rounded-xl" id="actual-code">const int a = 123;</code></pre>
+                    <pre
+                      class="rounded-xl arduino-code dark:border-zinc-500 border-zinc-700 border-2 line-numbers"
+                      style="width: 100%; height: 56vh; overflow-y: auto"
+                    ><code style="width: 100%; height: 100%; overflow-y: auto; " class="language-arduino rounded-xl" id="actual-code">const int a = 123;</code></pre>
+                  </div>
+                </div>
               </div>
             </div>
             <div id="htmlDIV" class="w-full"></div>
@@ -548,6 +560,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </template>
 
 <style scoped>
+.singleElem {
+  @apply lg:col-span-2;
+}
+
 @media (prefers-color-scheme: dark) {
   .arduino-code {
     background-color: #22272e;
