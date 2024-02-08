@@ -5,11 +5,9 @@ import utils from "../helpers/utils";
 import { useRoute } from "vue-router";
 import Swal from "sweetalert2";
 import Papa from "papaparse";
-import hljs from "highlight.js";
-import arduino from "highlight.js/lib/languages/arduino";
+import Prism from "prismjs";
 
-hljs.registerLanguage("arduino", arduino);
-
+window.Prism = window.Prism || {};
 function $(id) {
   return document.getElementById(id);
 }
@@ -169,11 +167,16 @@ utils.onLoad(() => {
       loadCSVFile(projectData.content.csv, "table-thing", true);
 
       try {
-        $("actual-code").innerHTML = hljs.highlight(
-          projectData.content.code.code,
-          { language: "cpp" }
-        ).value;
-      } catch (e) {}
+        const codeElem = $("actual-code");
+        let HTMLcode = projectData.content.code.code;
+        // HTMLcode = HTMLcode.replaceAll("<", "&lt;");
+        // HTMLcode = HTMLcode.replaceAll("&", "&amp;");
+        codeElem.innerHTML = HTMLcode;
+        Prism.highlightAll();
+        import("../helpers/prism");
+      } catch (e) {
+        console.error(e);
+      }
 
       // $("project-code").innerHTML = hljs.highlightAuto(
       //   projectData.content.code.code
@@ -503,7 +506,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
               />
               <div
                 id="project-code"
-                class="dark:bg-zinc-700 bg-zinc-400"
+                class="dark:bg-zinc-700 bg-gray-300"
                 style="width: 100%; height: 60vh; border-radius: 0.5rem"
               >
                 <div class="flex mb-2 mt-2">
@@ -516,9 +519,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 </div>
 
                 <pre
-                  class="rounded-xl arduino-code dark:border-zinc-500 border-zinc-700 border-2"
+                  class="rounded-xl arduino-code dark:border-zinc-500 border-zinc-700 border-2 line-numbers"
                   style="width: 100%; height: 56vh; overflow-y: auto"
-                ><code style="width: 100%; height: 100%; overflow-y: auto;" class="language-arduino rounded-xl" id="actual-code">/* Your Arduino code goes here */</code></pre>
+                ><code style="width: 100%; height: 100%; overflow-y: auto; " class="language-arduino rounded-xl" id="actual-code">const int a = 123;</code></pre>
               </div>
             </div>
             <div id="htmlDIV" class="w-full"></div>
