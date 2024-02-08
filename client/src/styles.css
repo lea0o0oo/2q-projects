@@ -14,8 +14,11 @@ body {
 }
 
 body {
-  width: 100vw;
   overflow-x: hidden;
+}
+
+#navContainer {
+  width: 100vw;
 }
 
 :root {
