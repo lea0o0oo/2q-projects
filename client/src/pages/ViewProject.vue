@@ -171,9 +171,12 @@ utils.onLoad(() => {
         let HTMLcode = projectData.content.code.code;
         // HTMLcode = HTMLcode.replaceAll("<", "&lt;");
         // HTMLcode = HTMLcode.replaceAll("&", "&amp;");
+        HTMLcode = HTMLcode.replace(/&/g, "&amp;").replace(/</g, "&lt;");
         codeElem.innerHTML = HTMLcode;
         Prism.highlightAll();
         import("../helpers/prism");
+
+        //$("leftidk").style.height = `calc(${$("leftidk").offsetHeight}px)`;
       } catch (e) {
         console.error(e);
       }
@@ -400,6 +403,7 @@ function downloadCode() {
         <div
           class="dark:bg-neutral bg-zinc-200 w-full rounded-lg lg:ml-2 md:ml-0 ml-0 h-full div-no-fll"
           style="min-height: 70vh"
+          id="leftidk"
         >
           <div class="ml-2 mr-2 mt-3">
             <div class="ml-2" style="display: flex; align-items: center">
@@ -419,54 +423,56 @@ function downloadCode() {
 
             <div class="divider"></div>
 
-            <h2 class="font-bold text-2xl mt-5">Descrizione</h2>
-            <pre
-              class="mt-5 ml-2"
-              style="white-space: pre-wrap; overflow-y: auto"
-              id="project-desc"
-            >
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla urna porttitor rhoncus dolor. Commodo elit at imperdiet dui accumsan sit amet nulla facilisi. Interdum velit euismod in pellentesque massa placerat. Et netus et malesuada fames ac turpis egestas maecenas pharetra. Convallis convallis tellus id interdum velit laoreet id. Habitant morbi tristique senectus et netus et malesuada fames ac. Urna nunc id cursus metus aliquam eleifend mi. Odio euismod lacinia at quis risus sed. Duis at consectetur lorem donec massa sapien faucibus et. Suspendisse in est ante in nibh. Tortor aliquam nulla facilisi cras. Sit amet massa vitae tortor. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Fermentum leo vel orci porta non. Integer feugiat scelerisque varius morbi enim nunc. Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Nibh nisl condimentum id venenatis a condimentum vitae sapien pellentesque. Sollicitudin nibh sit amet commodo nulla facilisi. Diam sollicitudin tempor id eu.</pre
-            >
-
-            <h4 class="font-bold text-2xl mt-10">Data</h4>
-            <p id="project-date">[DATA]</p>
-            <div id="links-div" class="mb-3">
-              <h2 class="font-bold text-2xl mt-5">Link</h2>
-              <button
-                class="btn btn-success dark:btn-outline"
-                @click="openProjectLink()"
+            <div id="infoBox">
+              <h2 class="font-bold text-2xl mt-5">Descrizione</h2>
+              <pre
+                class="mt-5 ml-2"
+                style="white-space: pre-wrap; overflow-y: auto"
+                id="project-desc"
               >
-                Link del progetto
-                <svg
-                  fill="currentColor"
-                  width="20px"
-                  height="20px"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla urna porttitor rhoncus dolor. Commodo elit at imperdiet dui accumsan sit amet nulla facilisi. Interdum velit euismod in pellentesque massa placerat. Et netus et malesuada fames ac turpis egestas maecenas pharetra. Convallis convallis tellus id interdum velit laoreet id. Habitant morbi tristique senectus et netus et malesuada fames ac. Urna nunc id cursus metus aliquam eleifend mi. Odio euismod lacinia at quis risus sed. Duis at consectetur lorem donec massa sapien faucibus et. Suspendisse in est ante in nibh. Tortor aliquam nulla facilisi cras. Sit amet massa vitae tortor. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Fermentum leo vel orci porta non. Integer feugiat scelerisque varius morbi enim nunc. Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Nibh nisl condimentum id venenatis a condimentum vitae sapien pellentesque. Sollicitudin nibh sit amet commodo nulla facilisi. Diam sollicitudin tempor id eu.</pre
+              >
+
+              <h4 class="font-bold text-2xl mt-10">Data</h4>
+              <p id="project-date">[DATA]</p>
+              <div id="links-div" class="mb-3">
+                <h2 class="font-bold text-2xl mt-5">Link</h2>
+                <button
+                  class="btn btn-success dark:btn-outline"
+                  @click="openProjectLink()"
                 >
-                  <path
-                    d="M18,10.82a1,1,0,0,0-1,1V19a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V8A1,1,0,0,1,5,7h7.18a1,1,0,0,0,0-2H5A3,3,0,0,0,2,8V19a3,3,0,0,0,3,3H16a3,3,0,0,0,3-3V11.82A1,1,0,0,0,18,10.82Zm3.92-8.2a1,1,0,0,0-.54-.54A1,1,0,0,0,21,2H15a1,1,0,0,0,0,2h3.59L8.29,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L20,5.41V9a1,1,0,0,0,2,0V3A1,1,0,0,0,21.92,2.62Z"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div id="admin-div" class="mb-3 hidden">
-              <h2 class="font-bold text-2xl mt-5">Admin</h2>
-              <button class="btn btn-warning" @click="modifyProject()">
-                Modifica il progetto
-                <svg
-                  fill="currentColor"
-                  width="20px"
-                  height="20px"
-                  viewBox="0 0 15 15"
-                  xmlns="http://www.w3.org/2000/svg"
-                  id="arrow"
-                >
-                  <path
-                    d="M8.29289 2.29289C8.68342 1.90237 9.31658 1.90237 9.70711 2.29289L14.2071 6.79289C14.5976 7.18342 14.5976 7.81658 14.2071 8.20711L9.70711 12.7071C9.31658 13.0976 8.68342 13.0976 8.29289 12.7071C7.90237 12.3166 7.90237 11.6834 8.29289 11.2929L11 8.5H1.5C0.947715 8.5 0.5 8.05228 0.5 7.5C0.5 6.94772 0.947715 6.5 1.5 6.5H11L8.29289 3.70711C7.90237 3.31658 7.90237 2.68342 8.29289 2.29289Z"
-                  />
-                </svg>
-              </button>
+                  Link del progetto
+                  <svg
+                    fill="currentColor"
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18,10.82a1,1,0,0,0-1,1V19a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V8A1,1,0,0,1,5,7h7.18a1,1,0,0,0,0-2H5A3,3,0,0,0,2,8V19a3,3,0,0,0,3,3H16a3,3,0,0,0,3-3V11.82A1,1,0,0,0,18,10.82Zm3.92-8.2a1,1,0,0,0-.54-.54A1,1,0,0,0,21,2H15a1,1,0,0,0,0,2h3.59L8.29,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L20,5.41V9a1,1,0,0,0,2,0V3A1,1,0,0,0,21.92,2.62Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div id="admin-div" class="mb-3 hidden">
+                <h2 class="font-bold text-2xl mt-5">Admin</h2>
+                <button class="btn btn-warning" @click="modifyProject()">
+                  Modifica il progetto
+                  <svg
+                    fill="currentColor"
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 15 15"
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="arrow"
+                  >
+                    <path
+                      d="M8.29289 2.29289C8.68342 1.90237 9.31658 1.90237 9.70711 2.29289L14.2071 6.79289C14.5976 7.18342 14.5976 7.81658 14.2071 8.20711L9.70711 12.7071C9.31658 13.0976 8.68342 13.0976 8.29289 12.7071C7.90237 12.3166 7.90237 11.6834 8.29289 11.2929L11 8.5H1.5C0.947715 8.5 0.5 8.05228 0.5 7.5C0.5 6.94772 0.947715 6.5 1.5 6.5H11L8.29289 3.70711C7.90237 3.31658 7.90237 2.68342 8.29289 2.29289Z"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -475,6 +481,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       <div
         style="display: flex; justify-content: center; width: 100%"
         class="lg:col-span-3"
+        id="rightThing"
       >
         <div
           class="dark:bg-neutral bg-zinc-200 w-full rounded-lg h-full div-no-fll flex align-middle"
@@ -505,11 +512,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
               </div>
             </div>
             <div class="flex w-full justify-center mt-5">
-              <div class="grid lg:grid-cols-2 grid-cols-1 gap-3 w-full">
+              <div
+                class="grid lg:grid-cols-2 grid-cols-1 gap-3 w-full"
+                style="height: 60vh"
+              >
                 <div id="iframeContainer" class="w-full">
                   <iframe
                     id="project-iframe"
-                    style="width: 100%; height: 60vh; border-radius: 0.5rem"
+                    style="width: 100%; min-height: 60vh; border-radius: 0.5rem"
                     src=""
                   />
                 </div>
@@ -517,9 +527,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                   <div
                     id="project-code"
                     class="dark:bg-zinc-700 bg-gray-300"
-                    style="width: 100%; height: 60vh; border-radius: 0.5rem"
+                    style="width: 100%; height: 56vh; border-radius: 0.5rem"
                   >
-                    <div class="flex mb-2 mt-2">
+                    <div class="flex mb-2 mt-2" id="ee">
                       <button class="btn btn-xs mr-2 ml-1" @click="copyCode()">
                         Copia
                       </button>
